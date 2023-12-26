@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_gray">#F7F7F7</color>
+    <color name="gray_stroke">#E6E6E6</color>
+    <color name="error_msg">#FF3200</color>
+
 </resources>

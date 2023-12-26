@@ -5,12 +5,11 @@ plugins {
 
 android {
     namespace = "com.android.hikers"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.android.hikers"
         minSdk = 24
-        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 

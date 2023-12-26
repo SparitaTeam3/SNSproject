@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Hikers</string>
+    <string name="id">아이디</string>
+    <string name="login">로그인</string>
+    <string name="not_member">아직 회원이 아니신가요?</string>
+    <string name="sign_up">가입하기</string>
 </resources>
