@@ -42,15 +42,21 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    //    private fun checkValidity(): Boolean {
+//
+//    }
+
     private fun initInputFields() {
         inspectId()
         inspectPw()
         inspectCheckPw()
     }
 
-//    private fun checkValidity(): Boolean {
-//
-//    }
+    private fun inspectId() {
+        etSignUpId.apply {
+            
+        }
+    }
 
     private fun initResultLauncher() {
         resultLauncher =
