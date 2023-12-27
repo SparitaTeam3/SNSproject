@@ -95,8 +95,8 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun initInputFields() {
         inspectId()
-        inspectPw()
-        inspectCheckPw()
+        //inspectPw()
+        //inspectCheckPw()
     }
 
     private fun inspectId() {
