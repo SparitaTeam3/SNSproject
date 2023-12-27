@@ -46,6 +46,7 @@
             android:layout_height="32dp"
             android:background="@drawable/edit_text_background"
             android:hint="@string/name"
+            android:maxLines="1"
             android:paddingHorizontal="12dp"
             android:textSize="12sp"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +59,8 @@
             android:layout_marginTop="4dp"
             android:text="- 이름입력 에러 메세지"
             android:textColor="@color/error_msg"
-            android:visibility="visible"
+            android:textSize="12dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/et_user_info_name"
             app:layout_constraintTop_toBottomOf="@id/et_user_info_name" />
 
@@ -75,7 +77,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_user_info_name_error_msg" />
 
         <Spinner
-            android:id="@+id/et_user_info_character_1"
+            android:id="@+id/spn_user_info_character_1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
@@ -83,20 +85,20 @@
             app:layout_constraintTop_toBottomOf="@id/et_user_info_introduce" />
 
         <Spinner
-            android:id="@+id/et_user_info_character_2"
+            android:id="@+id/spn_user_info_character_2"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/edit_text_background"
-            app:layout_constraintTop_toBottomOf="@id/et_user_info_character_1" />
+            app:layout_constraintTop_toBottomOf="@id/spn_user_info_character_1" />
 
         <Spinner
-            android:id="@+id/et_user_info_character_3"
+            android:id="@+id/spn_user_info_character_3"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/edit_text_background"
-            app:layout_constraintTop_toBottomOf="@id/et_user_info_character_2" />
+            app:layout_constraintTop_toBottomOf="@id/spn_user_info_character_2" />
 
         <android.widget.Button
             android:id="@+id/btn_user_info_summit_info"
@@ -108,7 +110,7 @@
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_user_info_character_3" />
+            app:layout_constraintTop_toBottomOf="@id/spn_user_info_character_3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
