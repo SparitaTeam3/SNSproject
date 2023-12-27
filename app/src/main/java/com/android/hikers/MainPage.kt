@@ -1,22 +1,24 @@
 package com.android.hikers
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainPage : AppCompatActivity() {
+    private val tv_info: TextView by lazy {findViewById(R.id.tv_myinfo)}
+    private val tv_more: TextView by lazy {findViewById(R.id.view_more)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page)
-        val tv_info = findViewById<TextView>(R.id.tv_myinfo)
-        val tv_more = findViewById<TextView>(R.id.view_more)
 
         setViewMore(tv_info,tv_more)
+
     }
 
     private fun setViewMore(contentTextView: TextView, viewMoreTextView: TextView) {
-        // getEllipsisCount()을 통한 더보기 표시 및 구현
         contentTextView.post {
             val lineCount = contentTextView.layout.lineCount
             if (lineCount > 0) {
@@ -28,6 +30,7 @@ class MainPage : AppCompatActivity() {
                     viewMoreTextView.setOnClickListener {
                         contentTextView.maxLines = Int.MAX_VALUE
                         viewMoreTextView.visibility = View.GONE
+                        tv_info.setMovementMethod(ScrollingMovementMethod())
                     }
                 }
             }
