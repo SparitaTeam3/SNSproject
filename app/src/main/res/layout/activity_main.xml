@@ -40,7 +40,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/user_icon"
+            android:src="@drawable/default_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -76,25 +76,36 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
+            <LinearLayout
                 android:id="@+id/post_item1"
-                layout="@layout/post_item_layout" />
-
-            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/post_item2"
-                layout="@layout/post_item_layout" />
-
-            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/post_item3"
-                layout="@layout/post_item_layout" />
-
-            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/post_item4"
-                layout="@layout/post_item_layout" />
-
-            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/post_item5"
-                layout="@layout/post_item_layout" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
