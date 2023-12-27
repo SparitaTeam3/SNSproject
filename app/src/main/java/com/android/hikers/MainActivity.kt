@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy{
+        // TODO intent로 ID 넘겨받기
         //intent.getStringExtra("userID") ?: ""
         "hong_gildong"
     }
