@@ -70,6 +70,7 @@
             android:layout_marginTop="12dp"
             android:text="에러메세지용"
             android:textColor="@color/error_msg"
+            android:textSize="12dp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/btn_login"
             app:layout_constraintTop_toBottomOf="@id/btn_login" />

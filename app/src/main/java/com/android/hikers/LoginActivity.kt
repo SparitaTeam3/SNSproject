@@ -55,8 +55,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initInputFields() {
-        etLoginId.doAfterTextChanged { checkButtonEnable() }
-        etLoginPw.doAfterTextChanged { checkButtonEnable() }
+        etLoginId.apply {
+            doAfterTextChanged {
+                checkButtonEnable()
+                background = getDrawable(R.drawable.edit_text_background)
+            }
+        }
+        etLoginPw.apply {
+            doAfterTextChanged {
+                checkButtonEnable()
+                background = getDrawable(R.drawable.edit_text_background)
+            }
+        }
     }
 
     private fun checkButtonEnable() {
@@ -98,6 +108,8 @@ class LoginActivity : AppCompatActivity() {
     private fun EditText.showError(string: String) {
         val animShake = AnimationUtils.loadAnimation(context, R.anim.shake_error)
         this.requestFocus()
+        this.background = getDrawable(R.drawable.edit_text_background_error)
+
         with(tvErrorMsg) {
             visibility = View.VISIBLE
             text = string
