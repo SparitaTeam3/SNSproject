@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity() {
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy{
-        intent.getStringExtra("userID") ?: ""
+        //intent.getStringExtra("userID") ?: ""
+        "hong_gildong"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,13 +58,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //화면 상단 프로필 영역 설정하기
-        //initProfile()
+        initProfile()
 
         //최신 게시글 보이기
         initScrollView()
 
         //게시글 클릭 이벤트 처리하기
         initPostItem()
+
 
         //글쓰기 버튼 클릭 이벤트 처리하기
         initWriteFloatingButton()
@@ -96,6 +98,11 @@ class MainActivity : AppCompatActivity() {
         postScrollView.isVisible = true
         for ((index, post) in recentPostList.withIndex()) {
             val postItem = postItemList[index]
+
+            postItemIDMap[postItem.id] = post.postID
+            postItem.isVisible = true
+
+            //게시글 정보 표시하기
             val imageImageView = postItem.findViewById<ImageView>(R.id.iv_img)
             val titleTextView = postItem.findViewById<TextView>(R.id.tv_title)
             val locationTextView = postItem.findViewById<TextView>(R.id.tv_location)
@@ -116,13 +123,41 @@ class MainActivity : AppCompatActivity() {
             writerNameTextView.text = userManager.findUserByID(post.writerId)!!.name
             timeTextView.text = post.writtenTime
 
-            postItemIDMap[postItem.id] = post.postID
-            postItem.isVisible = true
+            //게시글 좋아요 여부 표시하기
+            val heartImageView = postItem.findViewById<ImageView>(R.id.iv_heart)
+
+            val loginUser = userManager.findUserByID(userID)!!
+            heartImageView.setImageResource(
+                if(loginUser.isInLikedPostIDList(post.postID)) R.drawable.full_heart_icon
+                else R.drawable.empty_heart_icon
+            )
         }
     }
 
     private fun initPostItem(){
         for(postItem in postItemList){
+            //좋아요 클릭 이벤트 처리하기
+            val heartImageView = postItem.findViewById<ImageView>(R.id.iv_heart)
+           heartImageView.setOnClickListener {
+                val postID = postItemIDMap[postItem.id]!!
+                Log.d(TAG, "post item heart clicked) post id: ${postID}")
+
+                //좋아요 여부 확인하기
+                val loginUser = userManager.findUserByID(userID)!!
+
+                //이미 좋아요한 경우, 좋아요 삭제하기
+                if(loginUser.isInLikedPostIDList(postID)){
+                    heartImageView.setImageResource(R.drawable.empty_heart_icon)
+                    loginUser.deleteLikedPostID(postID)
+                }
+                //이미 좋아요하지 않은 경우, 좋아요 추가하기
+               else{
+                    heartImageView.setImageResource(R.drawable.full_heart_icon)
+                    loginUser.addLikedPostID(postID)
+                }
+            }
+
+            //게시글 클릭 이벤트 처리하기
             postItem.setOnClickListener {
                 val postID = postItemIDMap[postItem.id]
                 Log.d(TAG, "post item clicked) post id: ${postID}")
