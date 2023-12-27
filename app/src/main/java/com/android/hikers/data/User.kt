@@ -10,4 +10,14 @@ data class User(val ID:String,
                 val personality:MutableList<String> = mutableListOf<String>(),
                 val writtenPostIDList:MutableList<Int> = mutableListOf<Int>(),
                 val likedPostIDList:MutableList<Int> = mutableListOf<Int>()){
+
+    fun isInLikedPostIDList(postID:Int):Boolean{
+        return likedPostIDList.contains(postID)
+    }
+    fun addLikedPostID(postID:Int){
+        likedPostIDList.add(postID)
+    }
+    fun deleteLikedPostID(postID:Int){
+        likedPostIDList.remove(postID)
+    }
 }
