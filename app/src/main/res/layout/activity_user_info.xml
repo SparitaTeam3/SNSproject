@@ -6,4 +6,112 @@
     android:layout_height="match_parent"
     tools:context=".UserInfoActivity">
 
+    <ImageView
+        android:id="@+id/iv_user_info_profile"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/frame_circle"
+        android:clipToOutline="true"
+        android:src="@drawable/default_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/btn_user_info_change_profile"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/frame_circle"
+        android:backgroundTint="#00E664"
+        android:elevation="10dp"
+        android:shadowColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user_info_profile"
+        app:layout_constraintEnd_toEndOf="@id/iv_user_info_profile" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_user_info_elements"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_user_info_profile">
+
+        <EditText
+            android:id="@+id/et_user_info_name"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/name"
+            android:paddingHorizontal="12dp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_info_name_error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="- 이름입력 에러 메세지"
+            android:textColor="@color/error_msg"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@id/et_user_info_name"
+            app:layout_constraintTop_toBottomOf="@id/et_user_info_name" />
+
+        <EditText
+            android:id="@+id/et_user_info_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top"
+            android:hint="@string/plz_type_introduce"
+            android:padding="12dp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_info_name_error_msg" />
+
+        <Spinner
+            android:id="@+id/et_user_info_character_1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_text_background"
+            app:layout_constraintTop_toBottomOf="@id/et_user_info_introduce" />
+
+        <Spinner
+            android:id="@+id/et_user_info_character_2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_text_background"
+            app:layout_constraintTop_toBottomOf="@id/et_user_info_character_1" />
+
+        <Spinner
+            android:id="@+id/et_user_info_character_3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_text_background"
+            app:layout_constraintTop_toBottomOf="@id/et_user_info_character_2" />
+
+        <android.widget.Button
+            android:id="@+id/btn_user_info_summit_info"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/default_button_disable"
+            android:text="@string/summit_sign_up"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_user_info_character_3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

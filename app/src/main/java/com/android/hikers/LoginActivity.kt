@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
@@ -25,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         initButton()
-        initTextWatcher()
+        initInputFields()
     }
 
     private fun initButton() {
@@ -35,14 +34,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initResultLauncher() {
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                // 유저정보 처리 코드 입력
-            }
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val test = result.data?.getStringExtra(EXTRA_ID) ?: ""
+
+                    etLoginId.setText(test)
+                    // 유저정보 처리 코드 입력
+                }
 //            etLoginId.setText(받아온 데이터로 입력하는 코드)
 //            etLoginPw.setText(받아온 데이터로 입력하는 코드)
-        }
+            }
     }
+
     private fun initSignUp() {
         btnSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
@@ -50,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun initTextWatcher() {
+    private fun initInputFields() {
         etLoginId.doAfterTextChanged { checkButtonEnable() }
         etLoginPw.doAfterTextChanged { checkButtonEnable() }
     }
@@ -67,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initLogin() {
         btnLogin.setOnClickListener {
-            if(!checkValidity()) return@setOnClickListener
+            if (!checkValidity()) return@setOnClickListener
 
 //            val intent = Intent(this, 메인액티비티이름::class.java)
 //            startActivity(intent)
@@ -94,11 +98,10 @@ class LoginActivity : AppCompatActivity() {
     private fun EditText.showError(string: String) {
         val animShake = AnimationUtils.loadAnimation(context, R.anim.shake_error)
         this.requestFocus()
-        tvErrorMsg.visibility = View.VISIBLE
-        tvErrorMsg.text = string
-        tvErrorMsg.startAnimation(animShake)
+        with(tvErrorMsg) {
+            visibility = View.VISIBLE
+            text = string
+            startAnimation(animShake)
+        }
     }
-
-
-
 }
