@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy{
-        //intent.getStringExtra("userID") ?: ""
-        "hong_gildong"
+        intent.getStringExtra("userID") ?: ""
+//        "hong_gildong"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

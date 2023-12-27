@@ -11,8 +11,10 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
+import com.android.hikers.data.UserManager
 
-const val EXTRA_ID = "id"
+const val EXTRA_TO_USER_INFO_ID = "toUserInfo"
+const val EXTRA_TO_LOGIN_ID = "toLoginId"
 const val EXTRA_PW = "pw"
 
 class SignUpActivity : AppCompatActivity() {
@@ -42,8 +44,8 @@ class SignUpActivity : AppCompatActivity() {
             if (!checkValidity()) return@setOnClickListener
 
             val intent = Intent(this, UserInfoActivity::class.java).apply {
-                intent.putExtra(EXTRA_ID, etSignUpId.text.toString())
-                intent.putExtra(EXTRA_PW, etSignUpPw.text.toString())
+                putExtra(EXTRA_TO_USER_INFO_ID, idValue)
+                putExtra(EXTRA_PW, pwValue)
             }
             resultLauncher.launch(intent)
         }
@@ -53,7 +55,7 @@ class SignUpActivity : AppCompatActivity() {
         val animShake = AnimationUtils.loadAnimation(this, R.anim.shake_error)
 
         if (etSignUpId.text.isEmpty()) {
-            tvSignUpIdErrorMsg.showErrMsg("ㆍ 아이디를 입력해주세요")
+            tvSignUpIdErrorMsg.showErrMsg("아이디를 입력해주세요")
             tvSignUpIdErrorMsg.startAnimation(animShake)
             etSignUpId.background = getDrawable(R.drawable.edit_text_background_error)
             return false
@@ -66,7 +68,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         if (etSignUpPw.text.isEmpty()) {
-            tvSignUpPwErrorMsg.showErrMsg("ㆍ 비밀번호를 입력해주세요")
+            tvSignUpPwErrorMsg.showErrMsg("비밀번호를 입력해주세요")
             tvSignUpPwErrorMsg.startAnimation(animShake)
             etSignUpPw.background = getDrawable(R.drawable.edit_text_background_error)
             return false
@@ -79,10 +81,15 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         if (etSignUpCheckPw.text.isEmpty()) {
-            tvSignUpCheckPwErrorMsg.showErrMsg("ㆍ 비밀번호를 확인해주세요")
+            tvSignUpCheckPwErrorMsg.showErrMsg("비밀번호를 확인해주세요")
             tvSignUpCheckPwErrorMsg.startAnimation(animShake)
             etSignUpCheckPw.background = getDrawable(R.drawable.edit_text_background_error)
             return false
+        }
+
+        if (checkPwValue != pwValue) {
+            tvSignUpCheckPwErrorMsg.showErrMsg("비밀번호 정보가 일치하지 않습니다")
+            etSignUpCheckPw.background = getDrawable(R.drawable.edit_text_background_error)
         }
 
         if (!eachElementsValidity[2]) {
@@ -90,20 +97,27 @@ class SignUpActivity : AppCompatActivity() {
             tvSignUpCheckPwErrorMsg.startAnimation(animShake)
             return false
         }
+
+        if (UserManager.newInstance().checkUserExist(idValue)) {
+            tvSignUpIdErrorMsg.showErrMsg("이미 가입된 아이디입니다")
+            tvSignUpIdErrorMsg.startAnimation(animShake)
+            etSignUpId.background = getDrawable(R.drawable.edit_text_background_error)
+            return false
+        }
         return true
     }
 
     private fun initInputFields() {
         inspectId()
-        //inspectPw()
-        //inspectCheckPw()
+        inspectPw()
+        inspectCheckPw()
     }
 
     private fun inspectId() {
         val idPattern = Regex("^[a-zA-Z0-9]+$")
 
         etSignUpId.apply {
-            leaveEmpty(tvSignUpIdErrorMsg, "ㆍ 아이디를 입력해주세요")
+            leaveEmpty(tvSignUpIdErrorMsg, "아이디를 입력해주세요")
             doAfterTextChanged {
                 idValue = text.toString()
                 eachElementsValidity[0] = true
@@ -119,13 +133,13 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 if (!idPattern.containsMatchIn(idValue)) {
-                    tvSignUpIdErrorMsg.showErrMsg("ㆍ 아이디는 영문과 숫자만 사용해주세요")
+                    tvSignUpIdErrorMsg.showErrMsg("아이디는 영문과 숫자만 사용해주세요")
                     background = getDrawable(R.drawable.edit_text_background_error)
                     eachElementsValidity[0] = false
                 }
 
                 if (text.isEmpty()) {
-                    tvSignUpIdErrorMsg.showErrMsg("ㆍ 아이디를 입력해주세요")
+                    tvSignUpIdErrorMsg.showErrMsg("아이디를 입력해주세요")
                     background = getDrawable(R.drawable.edit_text_background_error)
                     eachElementsValidity[0] = false
                 }
@@ -138,7 +152,7 @@ class SignUpActivity : AppCompatActivity() {
         val pwPattern = Regex("(?=.*(?!\\d)[!@#\$%^&*()-_=+[ ]{}|;:'\",<.>/?])")
 
         etSignUpPw.apply {
-            leaveEmpty(tvSignUpPwErrorMsg, "ㆍ 비밀번호를 입력해주세요")
+            leaveEmpty(tvSignUpPwErrorMsg, "비밀번호를 입력해주세요")
             doAfterTextChanged {
                 pwValue = text.toString()
                 eachElementsValidity[1] = true
@@ -159,19 +173,21 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 if (pwValue.length < 8) {
-                    tvSignUpPwErrorMsg.showErrMsg("ㆍ 비밀번호는 8자리 이상으로 만들어주세요")
+                    tvSignUpPwErrorMsg.showErrMsg("비밀번호는 8자리 이상으로 만들어주세요")
                     background = getDrawable(R.drawable.edit_text_background_error)
                     eachElementsValidity[1] = false
                 }
 
                 if (!pwPattern.containsMatchIn(pwValue)) {
-                    tvSignUpPwErrorMsg.showErrMsg("ㆍ 비밀번호는 반드시 특수문자를 포함해야합니다")
+                    tvSignUpPwErrorMsg.showErrMsg("비밀번호는 반드시 특수문자를 포함해야합니다")
                     background = getDrawable(R.drawable.edit_text_background_error)
                     eachElementsValidity[1] = false
                 }
 
+
+
                 if (text.isEmpty()) {
-                    tvSignUpPwErrorMsg.showErrMsg("ㆍ 비밀번호를 입력해주세요")
+                    tvSignUpPwErrorMsg.showErrMsg("비밀번호를 입력해주세요")
                     background = getDrawable(R.drawable.edit_text_background_error)
                     eachElementsValidity[1] = false
                 }
@@ -182,7 +198,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun inspectCheckPw() {
         etSignUpCheckPw.apply {
-            leaveEmpty(tvSignUpCheckPwErrorMsg, "ㆍ 비밀번호를 확인해주세요")
+            leaveEmpty(tvSignUpCheckPwErrorMsg, "비밀번호를 확인해주세요")
             doAfterTextChanged {
                 checkPwValue = text.toString()
                 eachElementsValidity[2] = true
@@ -198,13 +214,13 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 if (checkPwValue != pwValue) {
-                    tvSignUpCheckPwErrorMsg.showErrMsg("ㆍ 비밀번호 정보가 일치하지 않습니다")
+                    tvSignUpCheckPwErrorMsg.showErrMsg("비밀번호 정보가 일치하지 않습니다")
                     background = getDrawable(R.drawable.edit_text_background_error)
                     eachElementsValidity[2] = false
                 }
 
                 if (text.isEmpty()) {
-                    tvSignUpCheckPwErrorMsg.showErrMsg("ㆍ 비밀번호를 확인해주세요")
+                    tvSignUpCheckPwErrorMsg.showErrMsg("비밀번호를 확인해주세요")
                     background = getDrawable(R.drawable.edit_text_background_error)
                     eachElementsValidity[2] = false
                 }
@@ -217,19 +233,19 @@ class SignUpActivity : AppCompatActivity() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
-                    intent.putExtra(EXTRA_ID, result.data?.getStringExtra(EXTRA_ID))
+                    intent.putExtra(EXTRA_TO_LOGIN_ID, result.data?.getStringExtra(EXTRA_TO_SIGN_UP_ID))
                     setResult(RESULT_OK, intent)
                     finish()
                 }
             }
     }
 
-    private fun TextView.showErrMsg(msg: String) {
+    fun TextView.showErrMsg(msg: String) {
         setText(msg)
         visibility = View.VISIBLE
     }
 
-    private fun EditText.leaveEmpty(errMsg: TextView, string: String) {
+    fun EditText.leaveEmpty(errMsg: TextView, string: String) {
         setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 if (text.isEmpty()) {

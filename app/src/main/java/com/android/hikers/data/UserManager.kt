@@ -25,7 +25,14 @@ class UserManager private constructor() {
         userList.add(User(ID, password, name))
     }
 
-    fun findUserByID(ID:String):User?{
+    fun findUserByID(ID: String): User? {
         return userList.find { it.ID == ID }
+    }
+
+    fun showUserList(): MutableList<User> {
+        return userList
+    }
+    fun checkUserExist(id: String): Boolean {
+        return userList.any { it.ID == id }
     }
 }
