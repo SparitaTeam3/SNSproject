@@ -21,18 +21,27 @@ class UserManager private constructor() {
         addNewUser("lee_younghee", "aaaaaaaa!", "이영희")
     }
 
-    fun addNewUser(ID: String, password: String, name: String) {
-        userList.add(User(ID, password, name))
+    fun addNewUser(
+        ID: String, password: String, name: String,
+        image: Uri? = null,
+        introduction: String = "",
+        personality: MutableList<String> = mutableListOf<String>()
+    ) {
+        userList.add(User(ID, password, name, image, introduction, personality))
     }
 
     fun findUserByID(ID: String): User? {
         return userList.find { it.ID == ID }
     }
 
-    fun showUserList(): MutableList<User> {
-        return userList
-    }
     fun checkUserExist(id: String): Boolean {
         return userList.any { it.ID == id }
+    }
+
+    fun isLoginSuccess(ID: String, password: String): Boolean {
+        userList.forEach {
+            if ((it.ID == ID) && (it.password == password)) return true
+        }
+        return false
     }
 }

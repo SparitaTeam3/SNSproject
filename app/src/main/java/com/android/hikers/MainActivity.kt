@@ -50,14 +50,13 @@ class MainActivity : AppCompatActivity() {
     //현재 로그인 한 유저의 아이디
     private val userID by lazy{
         intent.getStringExtra("userID") ?: ""
-//        "hong_gildong"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //화면 상단 프로필 영역 설정하기
+        //화면 상단 프로필 영역
         initProfile()
 
         //최신 게시글 보이기

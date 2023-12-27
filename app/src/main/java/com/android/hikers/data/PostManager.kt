@@ -2,6 +2,7 @@ package com.android.hikers.data
 
 import android.net.Uri
 import android.os.Build
+import com.android.hikers.R
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.*
@@ -31,12 +32,12 @@ class PostManager private constructor(){
             "5박6일 히말라야 트래킹에 다녀왔어요.\n풍경도 좋고 걸으며 마음이 많이 편해졌답니다.\n걷는 걸 좋아하시는 분들은 꼭 한 번 다녀오시길 바랍니다!",
             "kim_chulsoo",
             location = "히말라야",
-            image = Uri.parse("android.resource://com.android.hikers/drawable/post_image_example1"))
+            image = Uri.parse("drawable://" + R.drawable.post_img_example1))
 
         addNewPost("여기가 어느 산인지 아시는 분 계신가요?",
             "인터넷에서 본 사진인데요 여이가 어느 산인지 모르겠어요.ㅜㅜ\n여기가 어딘지 아시는 분 있다면 꼭 댓글 달아주세요!\n",
             "lee_younghee",
-            image = Uri.parse("android.resource://com.android.hikers/drawable/post_image_example2"))
+            image = Uri.parse("drawable://" + R.drawable.post_img_example2))
     }
 
     fun getCurrentDateTime():String{
@@ -47,31 +48,9 @@ class PostManager private constructor(){
         return ""
     }
 
-    fun addNewPost(title:String, body:String, writerId:String){
-        //게시물 ID 붙이기
-        val postID = nextPostID++
-        //게시물 게시된 시간 구하기
-        var writtenTime = getCurrentDateTime()
-        //새 게시물 생성하기
-        postList.add(Post(postID, title, body, writerId, writtenTime))
-    }
-    fun addNewPost(title:String, body:String, writerId:String, image:Uri){
-        //게시물 ID 붙이기
-        val postID = nextPostID++
-        //게시물 게시된 시간 구하기
-        var writtenTime = getCurrentDateTime()
-        //새 게시물 생성하기
-        postList.add(Post(postID, title, body, writerId, writtenTime, image = image))
-    }
-    fun addNewPost(title:String, body:String, writerId:String, location:String){
-        //게시물 ID 붙이기
-        val postID = nextPostID++
-        //게시물 게시된 시간 구하기
-        var writtenTime = getCurrentDateTime()
-        //새 게시물 생성하기
-        postList.add(Post(postID, title, body, writerId, writtenTime, location = location))
-    }
-    fun addNewPost(title:String, body:String, writerId:String, image:Uri, location:String){
+    fun addNewPost(title:String, body:String, writerId:String,
+                   image:Uri? = null, location:String = "위치 정보 없음"){
+
         //게시물 ID 붙이기
         val postID = nextPostID++
         //게시물 게시된 시간 구하기
