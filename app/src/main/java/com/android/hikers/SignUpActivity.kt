@@ -247,8 +247,4 @@ class SignUpActivity : AppCompatActivity() {
             btnSignUpNext.background = getDrawable(R.drawable.default_button_disable)
         }
     }
-
-    private fun checkIdValidity() {
-
-    }
 }
