@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Hikers</string>
+
+    <!--  메인 화면에서 사용하는 문자열  -->
+    <string name="user_greeting">안녕하세요, %s님!</string>
+    <string name="no_post">최신 게시물이 없습니다.</string>
+
+    <string name="post_title">게시물 제목</string>
+    <string name="post_location">위치 정보</string>
+    <string name="post_writer_name">작성자</string>
+    <string name="post_time">작성 시간</string>
 </resources>
