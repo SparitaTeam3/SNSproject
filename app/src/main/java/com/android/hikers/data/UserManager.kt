@@ -16,10 +16,16 @@ class UserManager private constructor() {
 
     init {
         //이미 회원가입 된 회원 3명 추가
-
+        addNewUser("hong_gildong", "aaaaaaaa!", "홍길동")
+        addNewUser("kim_chulsoo", "aaaaaaaa!", "김철수")
+        addNewUser("lee_younghee", "aaaaaaaa!", "이영희")
     }
 
     fun addNewUser(ID: String, password: String, name: String) {
-        userList
+        userList.add(User(ID, password, name))
+    }
+
+    fun findUserByID(ID:String):User?{
+        return userList.find { it.ID == ID }
     }
 }

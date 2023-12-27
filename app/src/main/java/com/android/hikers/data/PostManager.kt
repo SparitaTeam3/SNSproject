@@ -29,7 +29,7 @@ class PostManager private constructor(){
 
         addNewPost("히말라야 트래킹에 다녀왔어요",
             "5박6일 히말라야 트래킹에 다녀왔어요.\n풍경도 좋고 걸으며 마음이 많이 편해졌답니다.\n걷는 걸 좋아하시는 분들은 꼭 한 번 다녀오시길 바랍니다!",
-            "kim_chulsu",
+            "kim_chulsoo",
             location = "히말라야",
             image = Uri.parse("android.resource://com.android.hikers/drawable/post_image_example1"))
 
