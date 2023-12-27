@@ -4,29 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainPage">
+    tools:context=".MyPage">
 
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
         android:background="#00ff0000"
-        android:text="Button"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:textSize="10sp"
         android:background="#00ff0000"
+        android:drawableLeft="@drawable/drawable_setting"
         android:text="회원정보 수정"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +39,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/default_profile"
         app:civ_border_color="@color/black"
         app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
