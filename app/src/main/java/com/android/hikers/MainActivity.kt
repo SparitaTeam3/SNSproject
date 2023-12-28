@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun initProfileImageView() {
         userProfileImageView.setOnClickListener {
             Log.d(TAG, "profile image clicked")
@@ -175,10 +176,10 @@ class MainActivity : AppCompatActivity() {
                 val postID = postItemIDMap[postItem.id]
                 Log.d(TAG, "post item clicked) post id: ${postID}")
 
-                if (postID == -1) return@setOnClickListener
+                if(postID == -1) return@setOnClickListener
 
                 //로그인한 회원 ID와 게시물 ID 전달하며, 디테일 화면으로 이동
-                val detailIntent = Intent(this, DetailPageActivity::class.java).apply {
+                val detailIntent = Intent(this, DetailPageActivity::class.java).apply{
                     putExtra("userID", userID)
                     putExtra("postID", postID)
                 }
