@@ -1,6 +1,8 @@
 package com.android.hikers
 
+import android.app.ActivityOptions
 import android.content.Intent
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
