@@ -1,6 +1,5 @@
 package com.android.hikers
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.core.view.isVisible
 import com.android.hikers.data.PostManager
 import com.android.hikers.data.UserManager
