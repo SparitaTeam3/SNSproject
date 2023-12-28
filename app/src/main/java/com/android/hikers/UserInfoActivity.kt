@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -32,7 +34,7 @@ class UserInfoActivity : AppCompatActivity() {
     private lateinit var nameValue: String
     private var profileImageUri: Uri? = Uri.parse("drawable://" + R.drawable.default_profile)
     private var userNameInput = false
-    private var userCharacterValue = mutableListOf<String>()
+    private var userCharacterValue = MutableList<String>(3) {""}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,7 @@ class UserInfoActivity : AppCompatActivity() {
         getExtra()
         initButton()
         initInputFields()
+        initSpinner()
     }
 
     private fun getExtra() {
@@ -124,7 +127,51 @@ class UserInfoActivity : AppCompatActivity() {
             id = idValue,
             newName = etUserInfoName.text.toString(),
             newIntro = etUserInfoIntroduce.text.toString(),
-            newCharacter = userCharacterValue,
-            newProfileImage = profileImageUri)
+            newCharacter = userCharacterValue.filterNot { it == "" }.toMutableList(),
+            newProfileImage = profileImageUri
+        )
+    }
+
+    private fun initSpinner() {
+        initArrayAdapter(spnUserInfoCharacter1, 0)
+        initArrayAdapter(spnUserInfoCharacter2, 1)
+        initArrayAdapter(spnUserInfoCharacter3, 2)
+    }
+
+    private fun initArrayAdapter(spinner: Spinner, index: Int) {
+        val characterDetails = resources.getStringArray(R.array.characters)
+
+        ArrayAdapter.createFromResource(
+            this, R.array.characters, R.layout.spinner_layout_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_layout_dropdown)
+            spinner.adapter = adapter
+        }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                when (position) {
+                    0 -> userCharacterValue[index] = ""
+                    1 -> userCharacterValue[index] = characterDetails[1]
+                    2 -> userCharacterValue[index] = characterDetails[2]
+                    3 -> userCharacterValue[index] = characterDetails[3]
+                    4 -> userCharacterValue[index] = characterDetails[4]
+                    5 -> userCharacterValue[index] = characterDetails[5]
+                    6 -> userCharacterValue[index] = characterDetails[6]
+                    7 -> userCharacterValue[index] = characterDetails[7]
+                    8 -> userCharacterValue[index] = characterDetails[8]
+                    9 -> userCharacterValue[index] = characterDetails[9]
+                    10 -> userCharacterValue[index] = characterDetails[10]
+                    11 -> userCharacterValue[index] = characterDetails[11]
+                    12 -> userCharacterValue[index] = characterDetails[12]
+                    13 -> userCharacterValue[index] = characterDetails[13]
+                    14 -> userCharacterValue[index] = characterDetails[14]
+                    15 -> userCharacterValue[index] = characterDetails[15]
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 }

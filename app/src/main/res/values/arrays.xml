@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="character">
-        <item>-</item>
+    <string-array name="characters">
+        <item>키워드를 선택해주세요</item>
         <item>열정적</item>
         <item>외향적</item>
         <item>차분함</item>

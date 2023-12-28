@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
         userGreetingTextView.text = getString(R.string.user_greeting, userName)
         userProfileImageView.run {
-            if (userImage != null) setImageURI(userImage)
+            if (userImage != null) this.setImageURI(userImage)
             else setImageResource(R.drawable.default_profile)
         }
     }

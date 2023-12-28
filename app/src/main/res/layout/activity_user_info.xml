@@ -50,7 +50,7 @@
                 android:layout_height="32dp"
                 android:background="@drawable/edit_text_background"
                 android:hint="@string/name"
-                android:maxLines="1"
+                android:singleLine="true"
                 android:paddingHorizontal="12dp"
                 android:textSize="12sp"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +86,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/edit_text_background"
-                android:entries="@array/character"
+                android:entries="@array/characters"
                 android:paddingHorizontal="12dp"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/et_user_info_introduce" />
@@ -97,7 +97,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/edit_text_background"
-                android:entries="@array/character"
+                android:entries="@array/characters"
                 android:paddingHorizontal="12dp"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/spn_user_info_character_1" />
@@ -108,7 +108,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/edit_text_background"
-                android:entries="@array/character"
+                android:entries="@array/characters"
                 android:paddingHorizontal="12dp"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/spn_user_info_character_2" />
