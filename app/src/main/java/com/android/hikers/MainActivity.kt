@@ -17,13 +17,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
-    private val userGreetingTextView: TextView by lazy{findViewById(R.id.tv_user_greeting)}
-    private val userProfileImageView : ImageView by lazy{findViewById(R.id.iv_user_profile)}
+    private val userGreetingTextView: TextView by lazy { findViewById(R.id.tv_user_greeting) }
+    private val userProfileImageView: ImageView by lazy { findViewById(R.id.iv_user_profile) }
 
     private val noPostTextView: TextView by lazy { findViewById(R.id.tv_no_post) }
     private val postScrollView: ScrollView by lazy { findViewById(R.id.scroll_view_post) }
 
-    private val writeFloatingButton: FloatingActionButton by lazy{ findViewById(R.id.floating_btn_write)}
+    private val writeFloatingButton: FloatingActionButton by lazy { findViewById(R.id.floating_btn_write) }
 
     private val postItemList by lazy {
         listOf<ViewGroup>(
@@ -34,21 +34,23 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.post_item5)
         )
     }
+
     //postItemIDMap[postItem]: postItem이 표시하는 게시물 ID
-    private val postItemIDMap by lazy{
-        mutableMapOf<Int,Int>(
+    private val postItemIDMap by lazy {
+        mutableMapOf<Int, Int>(
             R.id.post_item1 to -1,
             R.id.post_item2 to -1,
             R.id.post_item3 to -1,
             R.id.post_item4 to -1,
-            R.id.post_item5 to -1)
+            R.id.post_item5 to -1
+        )
     }
 
     private val userManager = UserManager.newInstance()
     private val postManager = PostManager.newInstance()
 
     //현재 로그인 한 유저의 아이디
-    private val userID by lazy{
+    private val userID by lazy {
         "lee_younghee"
         //intent.getStringExtra("userID") ?: ""
     }
@@ -71,23 +73,24 @@ class MainActivity : AppCompatActivity() {
         initWriteFloatingButton()
     }
 
-    private fun initProfile(){
+    private fun initProfile() {
         val loginUser = userManager.findUserByID(userID)!!
         val userName = loginUser.name
         val userImage = loginUser.profileImage
 
         userGreetingTextView.text = getString(R.string.user_greeting, userName)
-        userProfileImageView.run{
-            if(userImage != null) setImageURI(userImage)
+        userProfileImageView.run {
+            if (userImage != null) setImageURI(userImage)
             else setImageResource(R.drawable.default_profile)
         }
     }
 
-    private fun initProfileImageView(){
+
+    private fun initProfileImageView() {
         userProfileImageView.setOnClickListener {
             Log.d(TAG, "profile image clicked")
             //로그인한 회원 ID 전달하며, 마이페이지 화면으로 이동
-            val profileIntent = Intent(this, MyPage::class.java).apply{
+            val profileIntent = Intent(this, MyPage::class.java).apply {
                 putExtra("userID", userID)
             }
             startActivity(profileIntent)
@@ -139,17 +142,17 @@ class MainActivity : AppCompatActivity() {
 
             val loginUser = userManager.findUserByID(userID)!!
             heartImageView.setImageResource(
-                if(loginUser.isInLikedPostIDList(post.postID)) R.drawable.full_heart_icon
+                if (loginUser.isInLikedPostIDList(post.postID)) R.drawable.full_heart_icon
                 else R.drawable.empty_heart_icon
             )
         }
     }
 
-    private fun initPostItem(){
-        for(postItem in postItemList){
+    private fun initPostItem() {
+        for (postItem in postItemList) {
             //좋아요 클릭 이벤트 처리하기
             val heartImageView = postItem.findViewById<ImageView>(R.id.iv_heart)
-           heartImageView.setOnClickListener {
+            heartImageView.setOnClickListener {
                 val postID = postItemIDMap[postItem.id]!!
                 Log.d(TAG, "post item heart clicked) post id: ${postID}")
 
@@ -157,12 +160,12 @@ class MainActivity : AppCompatActivity() {
                 val loginUser = userManager.findUserByID(userID)!!
 
                 //이미 좋아요한 경우, 좋아요 삭제하기
-                if(loginUser.isInLikedPostIDList(postID)){
+                if (loginUser.isInLikedPostIDList(postID)) {
                     heartImageView.setImageResource(R.drawable.empty_heart_icon)
                     loginUser.deleteLikedPostID(postID)
                 }
                 //이미 좋아요하지 않은 경우, 좋아요 추가하기
-               else{
+                else {
                     heartImageView.setImageResource(R.drawable.full_heart_icon)
                     loginUser.addLikedPostID(postID)
                 }
@@ -185,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initWriteFloatingButton(){
+    private fun initWriteFloatingButton() {
         writeFloatingButton.setOnClickListener {
             Log.d(TAG, "write button clicked")
 

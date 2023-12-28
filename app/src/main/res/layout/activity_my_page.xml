@@ -121,6 +121,7 @@
                 android:layout_height="wrap_content">
 
                 <include layout="@layout/mypage_post_layout" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -218,12 +219,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="250dp"
         android:text="좋아요"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollview" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_post" />
 
     <TextView
         android:id="@+id/tv_post"
@@ -236,4 +237,16 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+
+    <TextView
+        android:id="@+id/tv_no_recent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:layout_weight="1"
+        android:text="@string/no_post"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
