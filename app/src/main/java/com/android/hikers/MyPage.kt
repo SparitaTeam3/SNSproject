@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,10 +24,22 @@ class MyPage : AppCompatActivity() {
     private val back: ImageButton by lazy { findViewById(R.id.btn_back) }
     private val setting: Button by lazy { findViewById(R.id.btn_edit) }
     private val userManager = UserManager.newInstance()
+    private val myPageScrollView: HorizontalScrollView by lazy { findViewById(R.id.scrollview) }
+    private val myPageScrollView2: HorizontalScrollView by lazy { findViewById(R.id.likescrollview) }
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy {
         "hong_gildong"
+    }
+
+    private val postItemList by lazy {
+        listOf<ViewGroup>(
+            findViewById(R.id.post_item1),
+            findViewById(R.id.post_item2),
+            findViewById(R.id.post_item3),
+            findViewById(R.id.post_item4),
+            findViewById(R.id.post_item5)
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +52,7 @@ class MyPage : AppCompatActivity() {
 
         goToUserInfo()
 
-        initProfile()
+        initProfile2()
 
     }
 
@@ -61,7 +75,7 @@ class MyPage : AppCompatActivity() {
         }
     }
 
-    private fun initProfile() {
+    private fun initProfile2() {
         val loginUser = userManager.findUserByID(userID)!!
         val userName = loginUser.name
         val userImage = loginUser.profileImage
