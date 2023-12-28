@@ -82,7 +82,7 @@ class UserInfoActivity : AppCompatActivity() {
                 }
             }
         ivUserInfoProfile.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
 
             intent.type = "image/*"
             pickImageLauncher.launch(intent)
