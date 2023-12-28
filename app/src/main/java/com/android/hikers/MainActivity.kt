@@ -132,8 +132,15 @@ class MainActivity : AppCompatActivity() {
 
             imageImageView.run {
                 if (post.image != null) {
-                    setImageURI(post.image)
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    try {
+                        setImageURI(post.image)
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+                    }
+                    catch (e:Exception){
+                        Log.d(TAG, "게시물 이미지 uri 접근 문제 발생!")
+                        setImageResource(R.drawable.hikers_icon_small_grey)
+                        scaleType = ImageView.ScaleType.CENTER
+                    }
                 } else {
                     setImageResource(R.drawable.hikers_icon_small_grey)
                     scaleType = ImageView.ScaleType.CENTER

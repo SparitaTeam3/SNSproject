@@ -63,8 +63,15 @@ class DetailPageActivity : AppCompatActivity() {
         currentPost.run {
             //게시물 이미지 설정
             if (image != null) {
-                imageImageView.setImageURI(image)
-                imageImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                try {
+                    imageImageView.setImageURI(image)
+                    imageImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                }
+                catch (e:Exception){
+                    Log.d(TAG, "게시물 이미지 uri 접근 문제 발생!")
+                    imageImageView.setImageResource(R.drawable.hikers_icon_small_grey)
+                    imageImageView.scaleType = ImageView.ScaleType.CENTER
+                }
             } else {
                 imageImageView.setImageResource(R.drawable.hikers_icon_small_grey)
                 imageImageView.scaleType = ImageView.ScaleType.CENTER
