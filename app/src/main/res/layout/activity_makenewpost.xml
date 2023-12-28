@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MakeNewPostActivity">
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/makeNewPost_postTxt"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/sqaure_border"
+        android:background="#F7F7F7F7"
         android:ems="10"
         android:gravity="start|top"
         android:hint="게시글 내용을 읽어주세요."
@@ -23,100 +22,136 @@
         android:textColorHint="#61000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_loc"
-        app:layout_constraintBottom_toTopOf="@id/editTextTextMultiLine"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout1" />
+        app:layout_constraintTop_toBottomOf="@+id/makeNewPost_separator" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout1"
+        android:id="@+id/makeNewPost_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
+        android:hint="게시물 작성"
         android:textColorHint="@color/material_dynamic_neutral50"
         app:boxBackgroundColor="#F7F7F7"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+        app:layout_constraintTop_toBottomOf="@+id/makeNewPost_img">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="게시물 제목" />
+            android:includeFontPadding="false"
+            android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/makeNewPost_img"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout1"
+        android:layout_height="210dp"
+        android:adjustViewBounds="true"
+        android:background="@color/light_grey"
+        android:padding="90dp"
+        android:src="@drawable/hikers_icon_small_grey"
+        app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        tools:layout_editor_absoluteY="48dp" />
+
+    <ImageButton
+        android:id="@+id/makeNewPost_btn_addImg"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/frame_circle"
+        android:clickable="true"
+        android:src="@drawable/btn_circle"
+        app:layout_constraintBottom_toBottomOf="@id/makeNewPost_img"
+        app:layout_constraintEnd_toEndOf="@id/makeNewPost_img" />
+
+    <ImageView
+        android:id="@+id/makeNewPost_ic_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:rotation="45"
+        android:src="@drawable/close_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/makeNewPost_btn_addImg"
+        app:layout_constraintEnd_toEndOf="@id/makeNewPost_btn_addImg"
+        app:layout_constraintStart_toStartOf="@id/makeNewPost_btn_addImg"
+        app:layout_constraintTop_toTopOf="@id/makeNewPost_btn_addImg"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/makeNewPost_btn_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="올리기"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintBottom_toTopOf="@+id/makeNewPost_img"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/makeNewPost_btn_close"
         android:layout_width="wrap_content"
-        android:layout_height="12dp"
+        android:layout_height="0dp"
         android:layout_margin="12dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_x"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        android:src="@drawable/close_icon"
+        app:layout_constraintBottom_toTopOf="@+id/makeNewPost_img"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+    <TextView
+        android:id="@+id/makeNewPost_separator"
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="200dp"
-        android:textColorHint="@color/material_dynamic_neutral50"
-        app:boxBackgroundColor="#F7F7F7"
-        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#61000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@id/imageView2">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/makeNewPost_location" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/makeNewPost_location"
+        android:layout_width="115dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="#F7F7F7F7"
+        android:hint="위치 정보"
+        android:textColorHint="@color/material_dynamic_neutral50"
+        app:hintTextColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/makeNewPost_ic_location"
+        app:layout_constraintTop_toBottomOf="@+id/makeNewPost_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="위치 정보" />
+            android:padding="5dp"
+            android:textColorHint="#000000" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/makeNewPost_ic_location"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="@+id/makeNewPost_location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/makeNewPost_location"
+        app:srcCompat="@drawable/pin_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
