@@ -30,6 +30,7 @@ class MyPage : AppCompatActivity() {
     //현재 로그인 한 유저의 아이디
     private val userID by lazy {
         "hong_gildong"
+        //intent.getStringExtra("userID") ?: ""
     }
 
     private val postItemList by lazy {
@@ -93,8 +94,9 @@ class MyPage : AppCompatActivity() {
 
     private fun goToMain() {
         back.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, MainActivity::class.java)
+            //startActivity(intent)
+            finish()
         }
     }
 
