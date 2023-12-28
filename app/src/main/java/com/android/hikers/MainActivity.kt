@@ -2,7 +2,6 @@ package com.android.hikers
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -72,6 +71,13 @@ class MainActivity : AppCompatActivity() {
 
         //글쓰기 버튼 클릭 이벤트 처리하기
         initWriteFloatingButton()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        //최신 게시글 다시 보이기
+        initScrollView()
     }
 
     private fun initProfile() {
@@ -164,11 +170,15 @@ class MainActivity : AppCompatActivity() {
                 if (loginUser.isInLikedPostIDList(postID)) {
                     heartImageView.setImageResource(R.drawable.empty_heart_icon)
                     loginUser.deleteLikedPostID(postID)
+
+                    postManager.findPostByID(postID)!!.minusHeartCount()
                 }
                 //이미 좋아요하지 않은 경우, 좋아요 추가하기
                 else {
                     heartImageView.setImageResource(R.drawable.full_heart_icon)
                     loginUser.addLikedPostID(postID)
+
+                    postManager.findPostByID(postID)!!.plusHeartCount()
                 }
             }
 

@@ -35,7 +35,7 @@ class PostManager private constructor(){
             image = Uri.parse("drawable://" + R.drawable.post_img_example1))
 
         addNewPost("여기가 어느 산인지 아시는 분 계신가요?",
-            "인터넷에서 본 사진인데요 여이가 어느 산인지 모르겠어요.ㅜㅜ\n여기가 어딘지 아시는 분 있다면 꼭 댓글 달아주세요!\n",
+            "인터넷에서 본 사진인데요 여기가 어느 산인지 모르겠어요.ㅜㅜ\n여기가 어딘지 아시는 분 있다면 꼭 댓글 달아주세요!\n",
             "lee_younghee",
             image = Uri.parse("drawable://" + R.drawable.post_img_example2))
     }
@@ -66,5 +66,9 @@ class PostManager private constructor(){
             recentPostList.add(postList[postList.size -1 -i])
         }
         return recentPostList.toList()
+    }
+
+    fun findPostByID(postID: Int): Post? {
+        return postList.find { it.postID == postID }
     }
 }
