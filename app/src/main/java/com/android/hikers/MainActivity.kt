@@ -1,6 +1,8 @@
 package com.android.hikers
 
+import android.app.ActivityOptions
 import android.content.Intent
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -183,7 +185,14 @@ class MainActivity : AppCompatActivity() {
                     putExtra("userID", userID)
                     putExtra("postID", postID)
                 }
-                startActivity(detailIntent)
+
+                //메인 화면과 디테일 화면의 공유 요소
+                val postImageView = postItem.findViewById<ImageView>(R.id.iv_img)
+                //공유 요소가 있는 화면 애니메이션 만들기
+                val options = ActivityOptions
+                    .makeSceneTransitionAnimation(this, postImageView,getString(R.string.trans_post_image))
+
+                startActivity(detailIntent, options.toBundle())
             }
         }
     }
