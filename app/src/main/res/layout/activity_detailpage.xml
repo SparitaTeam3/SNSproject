@@ -50,11 +50,11 @@
         android:background="@drawable/frame_circle"
         android:scaleType="centerInside"
         android:clipToOutline="true"
+        android:src="@drawable/default_profile"
         app:circularflow_radiusInDP="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/detail_text_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/detail_text_header"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="@+id/detail_text_header" />
 
     <TextView
         android:id="@+id/detail_howLongAgo"
@@ -132,7 +132,7 @@
         app:layout_constraintStart_toEndOf="@+id/detail_pin_icon"
         app:layout_constraintTop_toBottomOf="@+id/detail_seperator" />
 
-    <EditText
+    <TextView
         android:id="@+id/detail_postTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         android:background="@android:color/transparent"
-        android:src="@drawable/full_heart_icon"
+        android:src="@drawable/empty_heart_icon"
         app:layout_constraintBottom_toBottomOf="@+id/detail_heartNum"
         app:layout_constraintEnd_toStartOf="@+id/detail_heartNum"
         app:layout_constraintTop_toTopOf="@+id/detail_heartNum" />
