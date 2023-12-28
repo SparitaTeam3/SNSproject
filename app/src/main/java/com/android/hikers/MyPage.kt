@@ -70,6 +70,8 @@ class MyPage : AppCompatActivity() {
 
         initHorizontalScrollView()
 
+        initPostItem()
+
         goToMain()
 
         goToUserInfo()
@@ -148,6 +150,25 @@ class MyPage : AppCompatActivity() {
 //            }
             titleText.text = post.title
             nameText.text = userManager.findUserByID(post.writerId)!!.name
+        }
+    }
+
+    private fun initPostItem() {
+        for (postItem in postItemList) {
+            //게시글 클릭 이벤트 처리하기
+            postItem.setOnClickListener {
+                val postID = postItemIDMap[postItem.id]
+                Log.d(TAG, "post item clicked) post id: ${postID}")
+
+                if (postID == -1) return@setOnClickListener
+
+                //로그인한 회원 ID와 게시물 ID 전달하며, 디테일 화면으로 이동
+                val detailIntent = Intent(this, DetailPageActivity::class.java).apply {
+                    putExtra("userID", userID)
+                    putExtra("postID", postID)
+                }
+                startActivity(detailIntent)
+            }
         }
     }
 
