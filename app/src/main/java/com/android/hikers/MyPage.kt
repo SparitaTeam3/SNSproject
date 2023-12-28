@@ -111,8 +111,8 @@ class MyPage : AppCompatActivity() {
         //아직 소개가 없어서 주석 처리 함
         //introduction.text = userintroduction
         profilePhoto.run {
-            if (userImage != null) setImageURI(userImage)
-            else setImageResource(R.drawable.default_profile)
+//            if (userImage != null) setImageURI(userImage)
+//            else setImageResource(R.drawable.default_profile)
         }
     }
 

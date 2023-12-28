@@ -30,11 +30,15 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
+            android:name=".MakeNewPostActivity"
+            android:exported="false"/>
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".DetailPageActivity"
             android:exported="false"/>
+
     </application>
 
 </manifest>
