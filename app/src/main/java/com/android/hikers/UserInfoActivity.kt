@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -13,8 +15,10 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
-
-const val EXTRA_TO_SIGN_UP_ID = "toSignUpId"
+import com.android.hikers.data.UserManager
+import com.android.hikers.extention.leaveEmpty
+import com.android.hikers.extention.showErrMsg
+import com.android.hikers.messages.ErrorMsg
 
 class UserInfoActivity : AppCompatActivity() {
     private val ivUserInfoProfile by lazy { findViewById<ImageView>(R.id.iv_user_info_profile) }
@@ -25,57 +29,70 @@ class UserInfoActivity : AppCompatActivity() {
     private val spnUserInfoCharacter2 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_2) }
     private val spnUserInfoCharacter3 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_3) }
     private val btnUserInfoSummitInfo by lazy { findViewById<Button>(R.id.btn_user_info_summit_info) }
+    private val userManager = UserManager.newInstance()
     private lateinit var idValue: String
     private lateinit var pwValue: String
     private lateinit var nameValue: String
-    private var profileImageUri: Uri? = Uri.parse("drawable://" + R.drawable.default_profile)
+    private var profileImageUri: Uri? = null
     private var userNameInput = false
+    private var userCharacterValue = MutableList(3) { "" }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
-        getExtra()
-        initInputFields()
-        initButton()
+        setValue()
+        setup()
+
     }
 
-    private fun getExtra() {
-        idValue = intent.getStringExtra(EXTRA_TO_USER_INFO_ID) ?: ""
+    private fun setup() {
+        initButton()
+        initInputFields()
+        initSpinner()
+    }
+
+    private fun setValue() {
+        idValue = intent.getStringExtra(EXTRA_ID) ?: ""
         pwValue = intent.getStringExtra(EXTRA_PW) ?: ""
     }
 
     private fun initInputFields() {
-        initProfileImageChange()
+        setProfileImage()
         inspectName()
     }
 
     private fun initButton() {
-        val userManager = com.android.hikers.data.UserManager.newInstance()
-
         btnUserInfoSummitInfo.setOnClickListener {
             val animShake = AnimationUtils.loadAnimation(this, R.anim.shake_error)
 
-            if (userNameInput) {
-                intent.putExtra(EXTRA_TO_SIGN_UP_ID, idValue)
-                userManager.addNewUser(idValue, pwValue, nameValue)
-                setResult(RESULT_OK, intent)
-                finish()
-            } else {
-                tvUserInfoNameErrorMsg.showErrMsg("이름을 입력해주세요")
+            if (!userNameInput) {
+                tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.msg[0], etUserInfoName)
                 tvUserInfoNameErrorMsg.startAnimation(animShake)
-                etUserInfoName.background = getDrawable(R.drawable.edit_text_background_error)
+                return@setOnClickListener
             }
+
+            if (userManager.checkUserExist(idValue)) {
+                updateUserInfo(idValue)
+            } else {
+                userManager.addNewUser(idValue, pwValue, nameValue)
+                updateUserInfo(idValue)
+            }
+            intent.putExtra(EXTRA_ID, idValue)
+            setResult(RESULT_OK, intent)
+            finish()
         }
     }
 
-    private fun initProfileImageChange() {
+    private fun setProfileImage() {
         val pickImageLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     profileImageUri = result.data?.data
-
-                    ivUserInfoProfile?.apply {
+                    grantUriPermission(
+                        "com.android.hikers", profileImageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                    ivUserInfoProfile?.run {
                         scaleType = ImageView.ScaleType.CENTER_CROP
                         setImageURI(profileImageUri)
                     }
@@ -91,7 +108,7 @@ class UserInfoActivity : AppCompatActivity() {
 
     private fun inspectName() {
         etUserInfoName.apply {
-            leaveEmpty(tvUserInfoNameErrorMsg, "이름을 입력해주세요")
+            leaveEmpty(tvUserInfoNameErrorMsg, ErrorMsg.NAME.msg[0])
             doAfterTextChanged {
                 nameValue = etUserInfoName.text.toString()
 
@@ -103,8 +120,7 @@ class UserInfoActivity : AppCompatActivity() {
                 }
 
                 if (nameValue.isEmpty()) {
-                    tvUserInfoNameErrorMsg.showErrMsg("이름을 입력해주세요")
-                    background = getDrawable(R.drawable.edit_text_background_error)
+                    tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.msg[0], this)
                     btnUserInfoSummitInfo.background =
                         getDrawable(R.drawable.default_button_disable)
                     userNameInput = false
@@ -113,20 +129,55 @@ class UserInfoActivity : AppCompatActivity() {
         }
     }
 
-    fun TextView.showErrMsg(msg: String) {
-        setText(msg)
-        visibility = View.VISIBLE
+    private fun updateUserInfo(id: String) {
+        userManager.changeUserInfo(
+            id = id,
+            newName = etUserInfoName.text.toString(),
+            newIntro = etUserInfoIntroduce.text.toString(),
+            newCharacter = userCharacterValue.filterNot { it == "" }.toMutableList(),
+            newProfileImage = profileImageUri
+        )
     }
 
-    fun EditText.leaveEmpty(errMsg: TextView, string: String) {
-        setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                if (text.isEmpty()) {
-                    errMsg.showErrMsg(string)
-                    background = getDrawable(R.drawable.edit_text_background_error)
+    private fun initSpinner() {
+        initArrayAdapter(spnUserInfoCharacter1, 0)
+        initArrayAdapter(spnUserInfoCharacter2, 1)
+        initArrayAdapter(spnUserInfoCharacter3, 2)
+    }
+
+    private fun initArrayAdapter(spinner: Spinner, index: Int) {
+        val characterDetails = resources.getStringArray(R.array.characters)
+
+        ArrayAdapter.createFromResource(this, R.array.characters, R.layout.spinner_layout_item)
+            .also { adapter ->
+                adapter.setDropDownViewResource(R.layout.spinner_layout_dropdown)
+                spinner.adapter = adapter
+            }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                when (position) {
+                    0 -> userCharacterValue[index] = ""
+                    1 -> userCharacterValue[index] = characterDetails[1]
+                    2 -> userCharacterValue[index] = characterDetails[2]
+                    3 -> userCharacterValue[index] = characterDetails[3]
+                    4 -> userCharacterValue[index] = characterDetails[4]
+                    5 -> userCharacterValue[index] = characterDetails[5]
+                    6 -> userCharacterValue[index] = characterDetails[6]
+                    7 -> userCharacterValue[index] = characterDetails[7]
+                    8 -> userCharacterValue[index] = characterDetails[8]
+                    9 -> userCharacterValue[index] = characterDetails[9]
+                    10 -> userCharacterValue[index] = characterDetails[10]
+                    11 -> userCharacterValue[index] = characterDetails[11]
+                    12 -> userCharacterValue[index] = characterDetails[12]
+                    13 -> userCharacterValue[index] = characterDetails[13]
+                    14 -> userCharacterValue[index] = characterDetails[14]
+                    15 -> userCharacterValue[index] = characterDetails[15]
                 }
             }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
-
 }

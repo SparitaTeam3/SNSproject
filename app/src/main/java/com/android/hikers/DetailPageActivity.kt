@@ -191,11 +191,11 @@ class DetailPageActivity : AppCompatActivity() {
         }
     }
     private fun initNextButton(){
-      nextButton.setOnClickListener {
-          if(!it.isEnabled) return@setOnClickListener
-          postID--
-          Log.d(TAG, "next button clicked, postID: ${postID}")
-          initDetailPage()
-      }
+        nextButton.setOnClickListener {
+            if(!it.isEnabled) return@setOnClickListener
+            postID--
+            Log.d(TAG, "next button clicked, postID: ${postID}")
+            initDetailPage()
+        }
     }
 }
