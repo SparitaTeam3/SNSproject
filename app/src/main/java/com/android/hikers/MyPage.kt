@@ -87,8 +87,8 @@ class MyPage : AppCompatActivity() {
         id.text = userId
         //introduction.text = userintroduction
         profilePhoto.run {
-            if (userImage != null) setImageURI(userImage)
-            else setImageResource(R.drawable.default_profile)
+//            if (userImage != null) setImageURI(userImage)
+//            else setImageResource(R.drawable.default_profile)
         }
     }
 

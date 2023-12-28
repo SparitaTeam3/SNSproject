@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="characters">
+        <item>키워드를 선택해주세요</item>
+        <item>열정적</item>
+        <item>외향적</item>
+        <item>차분함</item>
+        <item>다정함</item>
+        <item>센스굿</item>
+        <item>애교왕</item>
+        <item>재미짐</item>
+        <item>대담함</item>
+        <item>고상함</item>
+        <item>전문가</item>
+        <item>감각적</item>
+        <item>모험왕</item>
+        <item>감성적</item>
+        <item>겸손함</item>
+    </string-array>
+</resources>
