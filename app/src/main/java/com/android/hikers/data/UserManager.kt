@@ -34,13 +34,13 @@ class UserManager private constructor() {
         return userList.find { it.ID == ID }
     }
 
-    fun isIDUnique(ID:String):Boolean{
-        userList.forEach { if(it.ID == ID) return false }
-        return true
+    fun checkUserExist(id: String): Boolean {
+        return userList.any { it.ID == id }
     }
-    fun isLoginSuccess(ID:String, password:String):Boolean{
+
+    fun isLoginSuccess(ID: String, password: String): Boolean {
         userList.forEach {
-            if((it.ID == ID) && (it.password == password)) return true
+            if ((it.ID == ID) && (it.password == password)) return true
         }
         return false
     }
