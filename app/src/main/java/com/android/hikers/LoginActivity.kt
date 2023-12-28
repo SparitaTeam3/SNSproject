@@ -92,22 +92,22 @@ class LoginActivity : AppCompatActivity() {
         val pw = etLoginPw.text.toString()
 
         if (id.isEmpty()) {
-            etLoginId.showError(ErrorMsg.ID.msg[0], tvErrorMsg)
+            etLoginId.showError(ErrorMsg.ID.show(this, 0), tvErrorMsg)
             return false
         }
 
         if (pw.isEmpty()) {
-            etLoginPw.showError(ErrorMsg.PW.msg[0], tvErrorMsg)
+            etLoginPw.showError(ErrorMsg.PW.show(this, 0), tvErrorMsg)
             return false
         }
 
         if (!userManager.checkUserExist(id)) {
-            etLoginId.showError(ErrorMsg.ID.msg[1], tvErrorMsg)
+            etLoginId.showError(ErrorMsg.ID.show(this, 1), tvErrorMsg)
             return false
         }
 
         if (userManager.findUserByID(id)?.password != pw) {
-            etLoginPw.showError(ErrorMsg.PW.msg[1], tvErrorMsg)
+            etLoginPw.showError(ErrorMsg.PW.show(this, 1), tvErrorMsg)
             return false
         }
         return true

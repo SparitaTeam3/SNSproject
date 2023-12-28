@@ -67,7 +67,7 @@ class SignUpActivity : AppCompatActivity() {
         val checkPw = etSignUpCheckPw.text.toString()
 
         if (id.isEmpty()) {
-            failValidity(etSignUpId, tvSignUpIdErrorMsg, ErrorMsg.ID.msg[0])
+            failValidity(etSignUpId, tvSignUpIdErrorMsg, ErrorMsg.ID.show(this, 0))
             return false
         }
 
@@ -77,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         if (pw.isEmpty()) {
-            failValidity(etSignUpPw, tvSignUpPwErrorMsg, ErrorMsg.PW.msg[0])
+            failValidity(etSignUpPw, tvSignUpPwErrorMsg, ErrorMsg.PW.show(this, 0))
             return false
         }
 
@@ -87,12 +87,12 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         if (checkPw.isEmpty()) {
-            failValidity(etSignUpCheckPw, tvSignUpCheckPwErrorMsg, ErrorMsg.PW.msg[4])
+            failValidity(etSignUpCheckPw, tvSignUpCheckPwErrorMsg, ErrorMsg.PW.show(this, 4))
             return false
         }
 
         if (checkPwValue != pwValue) {
-            failValidity(etSignUpCheckPw, tvSignUpCheckPwErrorMsg, ErrorMsg.PW.msg[5])
+            failValidity(etSignUpCheckPw, tvSignUpCheckPwErrorMsg, ErrorMsg.PW.show(this, 5))
             return false
         }
 
@@ -102,7 +102,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         if (userManager.checkUserExist(idValue)) {
-            failValidity(etSignUpId, tvSignUpIdErrorMsg, ErrorMsg.ID.msg[2])
+            failValidity(etSignUpId, tvSignUpIdErrorMsg, ErrorMsg.ID.show(this, 2))
             return false
         }
         return true
@@ -112,7 +112,7 @@ class SignUpActivity : AppCompatActivity() {
         val idPattern = Regex("^[a-zA-Z0-9]+$")
 
         etSignUpId.apply {
-            leaveEmpty(tvSignUpIdErrorMsg, ErrorMsg.ID.msg[0])
+            leaveEmpty(tvSignUpIdErrorMsg, ErrorMsg.ID.show(context, 0))
             doAfterTextChanged {
                 idValue = text.toString()
                 passInspects[0] = true
@@ -128,12 +128,12 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 if (!idPattern.containsMatchIn(idValue)) {
-                    tvSignUpIdErrorMsg.showErrMsg(ErrorMsg.ID.msg[4], this)
+                    tvSignUpIdErrorMsg.showErrMsg(ErrorMsg.ID.show(context, 3), this)
                     passInspects[0] = false
                 }
 
                 if (text.isEmpty()) {
-                    tvSignUpIdErrorMsg.showErrMsg(ErrorMsg.ID.msg[0], this)
+                    tvSignUpIdErrorMsg.showErrMsg(ErrorMsg.ID.show(context, 0), this)
                     passInspects[0] = false
                 }
                 changeButtonState()
@@ -142,10 +142,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun inspectPw() {
-        val pwPattern = Regex("(?=.*(?!\\d)[!@#\$%^&*()-_=+][{}|;:'\",<.>/?])")
+        val pwPattern = Regex("(?=.*(?!\\d)[!@#\$%^&*()-_=+[ ]{}|;:'\",<.>/?])")
 
         etSignUpPw.apply {
-            leaveEmpty(tvSignUpPwErrorMsg, ErrorMsg.PW.msg[0])
+            leaveEmpty(tvSignUpPwErrorMsg, ErrorMsg.PW.show(context, 0))
             doAfterTextChanged {
                 pwValue = text.toString()
                 passInspects[1] = true
@@ -166,17 +166,17 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 if (pwValue.length < 8) {
-                    tvSignUpPwErrorMsg.showErrMsg(ErrorMsg.PW.msg[2], this)
+                    tvSignUpPwErrorMsg.showErrMsg(ErrorMsg.PW.show(context, 2), this)
                     passInspects[1] = false
                 }
 
                 if (!pwPattern.containsMatchIn(pwValue)) {
-                    tvSignUpPwErrorMsg.showErrMsg(ErrorMsg.PW.msg[3], this)
+                    tvSignUpPwErrorMsg.showErrMsg(ErrorMsg.PW.show(context, 3), this)
                     passInspects[1] = false
                 }
 
                 if (text.isEmpty()) {
-                    tvSignUpPwErrorMsg.showErrMsg(ErrorMsg.PW.msg[0], this)
+                    tvSignUpPwErrorMsg.showErrMsg(ErrorMsg.PW.show(context, 0), this)
                     passInspects[1] = false
                 }
                 changeButtonState()
@@ -186,7 +186,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun inspectCheckPw() {
         etSignUpCheckPw.apply {
-            leaveEmpty(tvSignUpCheckPwErrorMsg, ErrorMsg.PW.msg[4])
+            leaveEmpty(tvSignUpCheckPwErrorMsg, ErrorMsg.PW.show(context, 4))
             doAfterTextChanged {
                 checkPwValue = text.toString()
                 passInspects[2] = true
@@ -202,12 +202,12 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 if (checkPwValue != pwValue) {
-                    tvSignUpCheckPwErrorMsg.showErrMsg(ErrorMsg.PW.msg[5], this)
+                    tvSignUpCheckPwErrorMsg.showErrMsg(ErrorMsg.PW.show(context, 5), this)
                     passInspects[2] = false
                 }
 
                 if (text.isEmpty()) {
-                    tvSignUpCheckPwErrorMsg.showErrMsg(ErrorMsg.PW.msg[4], this)
+                    tvSignUpCheckPwErrorMsg.showErrMsg(ErrorMsg.PW.show(context, 4), this)
                     passInspects[2] = false
                 }
                 changeButtonState()
