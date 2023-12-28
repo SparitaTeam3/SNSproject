@@ -18,4 +18,11 @@
     <string name="post_writer_name">작성자</string>
     <string name="post_time">작성 시간</string>
 
+    <!-- 마이페이지 문자열 -->
+    <string name="edit_myinfo">회원정보 수정</string>
+    <string name="introduction">자기소개</string>
+    <string name="more">더보기</string>
+    <string name="record">기록</string>
+    <string name="like">좋아요</string>
+
 </resources>
