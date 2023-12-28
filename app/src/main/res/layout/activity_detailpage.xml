@@ -140,7 +140,6 @@
         android:id="@+id/detail_postTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constrainedHeight="true"
         android:background="@android:color/transparent"
         android:ems="10"
         android:gravity="start|top"
@@ -151,6 +150,8 @@
         android:paddingBottom="12dp"
         android:text="Lorem ipsum dolor sit amet consectetur. Mi ut cum faucibus venenatis consectetur bibendum. Vitae facilisis lacus pharetra egestas enim quis hendrerit. Molestie ultrices tristique faucibus placerat. Eu eu cras at ornare tortor sapien purus sagittis commodo."
         android:textColor="#009245"
+        android:textSize="16sp"
+        app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_where" />
