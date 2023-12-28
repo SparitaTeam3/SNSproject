@@ -18,7 +18,15 @@
     <string name="post_writer_name">작성자</string>
     <string name="post_time">작성 시간</string>
 
-<<<<<<< HEAD
+
+    <!-- 마이페이지 문자열 -->
+    <string name="edit_myinfo">회원정보 수정</string>
+    <string name="introduction">자기소개</string>
+    <string name="more">더보기</string>
+    <string name="record">기록</string>
+    <string name="like">좋아요</string>
+=======
+
     <string name="plz_input_id">아이디를 입력해 주세요</string>
     <string name="plz_input_pw">비밀번호를 입력해 주세요</string>
     <string name="plz_check_pw">비밀번호를 확인해 주세요</string>
@@ -30,9 +38,9 @@
     <string name="id_use_eng_num">아이디는 영문과 숫자만 사용해 주세요</string>
     <string name="pw_more_eight">비밀번호는 8자리 이상으로 만들어주세요</string>
     <string name="pw_must_have_special">비밀번호는 8자리 이상으로 만들어주세요</string>
-=======
+
     <!--  애니메이션 공유 요소 이름  -->
     <string name="trans_post_image">post_image</string>
->>>>>>> 1f772f29785861a025479593f15ecab8b7039ba3
+
 
 </resources>

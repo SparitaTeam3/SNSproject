@@ -40,6 +40,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.material:material:1.12.0-alpha02")
+
 
     //circle imageview library
     implementation ("de.hdodenhof:circleimageview:3.1.0")
