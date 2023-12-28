@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.android.hikers.data.PostManager
 import com.android.hikers.data.UserManager
+import com.google.android.material.chip.ChipGroup
 
 
 class MyPage : AppCompatActivity() {
@@ -30,7 +31,6 @@ class MyPage : AppCompatActivity() {
     private val setting: Button by lazy { findViewById(R.id.btn_edit) }
     private val myPageScrollView: HorizontalScrollView by lazy { findViewById(R.id.scrollview) }
     private val myPageScrollView2: HorizontalScrollView by lazy { findViewById(R.id.likescrollview) }
-
     private val userManager = UserManager.newInstance()
     private val postManager = PostManager.newInstance()
 
@@ -115,6 +115,8 @@ class MyPage : AppCompatActivity() {
             else setImageResource(R.drawable.default_profile)
         }
     }
+
+
 
     private fun initHorizontalScrollView() {
         postItemList.forEach { it.isVisible = false }
