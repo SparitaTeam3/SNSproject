@@ -3,9 +3,7 @@ package com.android.hikers
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -14,6 +12,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doAfterTextChanged
 import com.android.hikers.data.UserManager
+import com.android.hikers.extention.showError
+import com.android.hikers.messages.ErrorMsg
 
 class LoginActivity : AppCompatActivity() {
     private val etLoginId by lazy { findViewById<EditText>(R.id.et_login_id) }
@@ -37,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initInputFields() {
-        etLoginId.checkIsNotEmpty()
-        etLoginPw.checkIsNotEmpty()
+        etLoginId.inputIsFull()
+        etLoginPw.inputIsFull()
     }
 
     private fun initSignUp() {
@@ -51,12 +51,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initLogin() {
         btnLogin.setOnClickListener {
-            Log.i("user_info_update_test", "${userManager.findUserByID(etLoginId.text.toString())}")
             if (!checkValidity()) {
                 return@setOnClickListener
             }
             val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("userID", etLoginId.text.toString())
+                putExtra(EXTRA_ID, etLoginId.text.toString())
             }
             startActivity(intent)
         }
@@ -66,16 +65,16 @@ class LoginActivity : AppCompatActivity() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
-                    val signUpUser = userManager.findUserByID(
-                        result.data?.getStringExtra(EXTRA_ID) ?: ""
-                    )
+                    val id = result.data?.getStringExtra(EXTRA_ID) ?: ""
+                    val signUpUser = userManager.findUserByID(id)
+
                     etLoginId.setText(signUpUser?.ID)
                     etLoginPw.setText(signUpUser?.password)
                 }
             }
     }
 
-    private fun EditText.checkIsNotEmpty() {
+    private fun EditText.inputIsFull() {
         this.doAfterTextChanged {
             tvErrorMsg.visibility = View.GONE
             background = getDrawable(R.drawable.edit_text_background)
@@ -93,36 +92,24 @@ class LoginActivity : AppCompatActivity() {
         val pw = etLoginPw.text.toString()
 
         if (id.isEmpty()) {
-            etLoginId.showError("아이디를 입력해 주세요")
+            etLoginId.showError(ErrorMsg.ID.msg[0], tvErrorMsg)
             return false
         }
 
         if (pw.isEmpty()) {
-            etLoginPw.showError("비밀번호를 입력해 주세요")
+            etLoginPw.showError(ErrorMsg.PW.msg[0], tvErrorMsg)
             return false
         }
 
         if (!userManager.checkUserExist(id)) {
-            etLoginId.showError("가입되지 않은 아이디입니다")
+            etLoginId.showError(ErrorMsg.ID.msg[1], tvErrorMsg)
             return false
         }
 
         if (userManager.findUserByID(id)?.password != pw) {
-            etLoginPw.showError("비밀번호가 맞지 않습니다")
+            etLoginPw.showError(ErrorMsg.PW.msg[1], tvErrorMsg)
             return false
         }
         return true
-    }
-
-    private fun EditText.showError(string: String) {
-        val animShake = AnimationUtils.loadAnimation(context, R.anim.shake_error)
-        this.requestFocus()
-        this.background = getDrawable(R.drawable.edit_text_background_error)
-
-        with(tvErrorMsg) {
-            visibility = View.VISIBLE
-            text = string
-            startAnimation(animShake)
-        }
     }
 }

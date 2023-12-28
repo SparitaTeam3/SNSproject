@@ -18,6 +18,7 @@ import androidx.core.widget.doAfterTextChanged
 import com.android.hikers.data.UserManager
 import com.android.hikers.extention.leaveEmpty
 import com.android.hikers.extention.showErrMsg
+import com.android.hikers.messages.ErrorMsg
 
 class UserInfoActivity : AppCompatActivity() {
     private val ivUserInfoProfile by lazy { findViewById<ImageView>(R.id.iv_user_info_profile) }
@@ -32,21 +33,26 @@ class UserInfoActivity : AppCompatActivity() {
     private lateinit var idValue: String
     private lateinit var pwValue: String
     private lateinit var nameValue: String
-    private var profileImageUri: Uri? = Uri.parse("drawable://" + R.drawable.default_profile)
+    private var profileImageUri: Uri? = null
     private var userNameInput = false
-    private var userCharacterValue = MutableList<String>(3) {""}
+    private var userCharacterValue = MutableList(3) { "" }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
-        getExtra()
+        setValue()
+        setup()
+
+    }
+
+    private fun setup() {
         initButton()
         initInputFields()
         initSpinner()
     }
 
-    private fun getExtra() {
+    private fun setValue() {
         idValue = intent.getStringExtra(EXTRA_ID) ?: ""
         pwValue = intent.getStringExtra(EXTRA_PW) ?: ""
     }
@@ -60,22 +66,21 @@ class UserInfoActivity : AppCompatActivity() {
         btnUserInfoSummitInfo.setOnClickListener {
             val animShake = AnimationUtils.loadAnimation(this, R.anim.shake_error)
 
-            if (userNameInput) {
-                intent.putExtra(EXTRA_ID, idValue)
-
-                if (userManager.checkUserExist(idValue)) {
-                    updatUserInfo()
-                } else {
-                    userManager.addNewUser(idValue, pwValue, nameValue)
-                    updatUserInfo()
-                }
-                setResult(RESULT_OK, intent)
-                finish()
-            } else {
-                tvUserInfoNameErrorMsg.showErrMsg("이름을 입력해주세요")
+            if (!userNameInput) {
+                tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.msg[0], etUserInfoName)
                 tvUserInfoNameErrorMsg.startAnimation(animShake)
-                etUserInfoName.background = getDrawable(R.drawable.edit_text_background_error)
+                return@setOnClickListener
             }
+
+            if (userManager.checkUserExist(idValue)) {
+                updateUserInfo(idValue)
+            } else {
+                userManager.addNewUser(idValue, pwValue, nameValue)
+                updateUserInfo(idValue)
+            }
+            intent.putExtra(EXTRA_ID, idValue)
+            setResult(RESULT_OK, intent)
+            finish()
         }
     }
 
@@ -84,7 +89,10 @@ class UserInfoActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     profileImageUri = result.data?.data
-                    ivUserInfoProfile?.apply {
+                    grantUriPermission(
+                        "com.android.hikers", profileImageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                    ivUserInfoProfile?.run {
                         scaleType = ImageView.ScaleType.CENTER_CROP
                         setImageURI(profileImageUri)
                     }
@@ -100,7 +108,7 @@ class UserInfoActivity : AppCompatActivity() {
 
     private fun inspectName() {
         etUserInfoName.apply {
-            leaveEmpty(tvUserInfoNameErrorMsg, "이름을 입력해주세요")
+            leaveEmpty(tvUserInfoNameErrorMsg, ErrorMsg.NAME.msg[0])
             doAfterTextChanged {
                 nameValue = etUserInfoName.text.toString()
 
@@ -112,8 +120,7 @@ class UserInfoActivity : AppCompatActivity() {
                 }
 
                 if (nameValue.isEmpty()) {
-                    tvUserInfoNameErrorMsg.showErrMsg("이름을 입력해주세요")
-                    background = getDrawable(R.drawable.edit_text_background_error)
+                    tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.msg[0], this)
                     btnUserInfoSummitInfo.background =
                         getDrawable(R.drawable.default_button_disable)
                     userNameInput = false
@@ -122,9 +129,9 @@ class UserInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun updatUserInfo() {
+    private fun updateUserInfo(id: String) {
         userManager.changeUserInfo(
-            id = idValue,
+            id = id,
             newName = etUserInfoName.text.toString(),
             newIntro = etUserInfoIntroduce.text.toString(),
             newCharacter = userCharacterValue.filterNot { it == "" }.toMutableList(),
@@ -141,12 +148,11 @@ class UserInfoActivity : AppCompatActivity() {
     private fun initArrayAdapter(spinner: Spinner, index: Int) {
         val characterDetails = resources.getStringArray(R.array.characters)
 
-        ArrayAdapter.createFromResource(
-            this, R.array.characters, R.layout.spinner_layout_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(R.layout.spinner_layout_dropdown)
-            spinner.adapter = adapter
-        }
+        ArrayAdapter.createFromResource(this, R.array.characters, R.layout.spinner_layout_item)
+            .also { adapter ->
+                adapter.setDropDownViewResource(R.layout.spinner_layout_dropdown)
+                spinner.adapter = adapter
+            }
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long

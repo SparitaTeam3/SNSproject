@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy {
-        intent.getStringExtra("userID") ?: ""
+        intent.getStringExtra(EXTRA_ID) ?: "lee_younghee"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,13 +60,13 @@ class MainActivity : AppCompatActivity() {
 
         //화면 상단 프로필 영역
         initProfile()
+        //프로필 이미지 클릭 이벤트 처리하기
+        initProfileImageView()
 
         //최신 게시글 보이기
         initScrollView()
-
         //게시글 클릭 이벤트 처리하기
         initPostItem()
-
 
         //글쓰기 버튼 클릭 이벤트 처리하기
         initWriteFloatingButton()
@@ -79,8 +79,19 @@ class MainActivity : AppCompatActivity() {
 
         userGreetingTextView.text = getString(R.string.user_greeting, userName)
         userProfileImageView.run {
-            if (userImage != null) this.setImageURI(userImage)
+            if (userImage != null) setImageURI(userImage)
             else setImageResource(R.drawable.default_profile)
+        }
+    }
+
+    private fun initProfileImageView() {
+        userProfileImageView.setOnClickListener {
+            Log.d(TAG, "profile image clicked")
+            //로그인한 회원 ID 전달하며, 마이페이지 화면으로 이동
+            val profileIntent = Intent(this, MyPage::class.java).apply {
+                putExtra("userID", userID)
+            }
+            startActivity(profileIntent)
         }
     }
 
@@ -165,6 +176,13 @@ class MainActivity : AppCompatActivity() {
 
                 if (postID == -1) return@setOnClickListener
                 //TODO 게시물 ID 전달하며, 디테일 화면으로 이동
+
+                //로그인한 회원 ID와 게시물 ID 전달하며, 디테일 화면으로 이동
+                val detailIntent = Intent(this, DetailPageActivity::class.java).apply {
+                    putExtra("userID", userID)
+                    putExtra("postID", postID)
+                }
+                startActivity(detailIntent)
             }
         }
     }
@@ -172,6 +190,7 @@ class MainActivity : AppCompatActivity() {
     private fun initWriteFloatingButton() {
         writeFloatingButton.setOnClickListener {
             Log.d(TAG, "write button clicked")
+
             //TODO 로그인한 회원 ID 전달하며, 글쓰기 화면으로 이동
         }
     }
