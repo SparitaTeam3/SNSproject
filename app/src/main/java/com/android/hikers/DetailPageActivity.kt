@@ -46,15 +46,26 @@ class DetailPageActivity : AppCompatActivity() {
         //현재 화면에 표시할 게시물ID 
         postID = intent?.getIntExtra("postID", 0) ?: 0
 
+        //뒤로가기 버튼 클릭 이벤트 처리
+        initBackButton()
+
         //게시물 화면에 표시
         initDetailPage()
 
         //하트 클릭 이벤트 처리
         initHeartButton()
 
-        //TODO 전 게시글 버튼 클릭 이벤트 처리
-        //TODO 다음 게시글 버튼 클릭 이벤트 처리
+        //이전 게시물 버튼 클릭 이벤트 처리
+        initPreButton()
+        //다음 게시물 버튼 클릭 이벤트 처리
+        initNextButton()
+    }
 
+    private fun initBackButton(){
+        backButton.setOnClickListener {
+            //디테일 화면 종료 -> 메인 화면으로 돌아가기
+            finish()
+        }
     }
 
     private fun initDetailPage() {
@@ -101,11 +112,14 @@ class DetailPageActivity : AppCompatActivity() {
             bodyTextView.text = body
 
             //하트 관련 UI 설정
-            drawHeartUI()
+            setHeartUI()
+
+            //버튼 관련 UI 설정
+            setPreNextButtonUI()
         }
     }
 
-    private fun drawHeartUI() {
+    private fun setHeartUI() {
         //로그인한 User 정보 가져오기
         userManager.findUserByID(userID)!!.run {
             //하트 이미지 설정
@@ -117,6 +131,36 @@ class DetailPageActivity : AppCompatActivity() {
             heartNumTextView.text = postManager.findPostByID(postID)!!.heartCount.toString()
         }
     }
+
+    private fun setPreNextButtonUI(){
+        //이전 게시물이 없는 경우, 이전 버튼 disable
+        val mostRecentPostID = postManager.getMostRecentPostID()
+        Log.d(TAG, "set pre button, mostRecentPostID: ${mostRecentPostID?: "null"}")
+        preButton.run{
+            if((mostRecentPostID == null)||(postID == mostRecentPostID)){
+                isEnabled = false
+                setImageResource(R.drawable.btn_nextpage_disabled)
+            }
+            else{
+                isEnabled = true
+                setImageResource(R.drawable.btn_nextpage)
+            }
+        }
+
+        //다음 게시물이 없는 경우, 다음 버튼 disable
+        val leastRecentPostID = postManager.getLeastRecentPostID(3)
+        Log.d(TAG, "set next button, leastRecentPostID: ${leastRecentPostID?: "null"}")
+        nextButton.run{
+            if((leastRecentPostID == null)||(postID == leastRecentPostID)){
+                isEnabled = false
+                setImageResource(R.drawable.btn_nextpage_disabled)
+            }
+            else{
+                isEnabled = true
+                setImageResource(R.drawable.btn_nextpage)
+            }
+        }
+    }
     
     private fun initHeartButton(){
         heartButton.setOnClickListener {
@@ -125,18 +169,33 @@ class DetailPageActivity : AppCompatActivity() {
                 //이미 좋아요한 경우, 좋아요 삭제하기
                 if (isInLikedPostIDList(postID)) {
                     deleteLikedPostID(postID)
-
                     postManager.findPostByID(postID)!!.minusHeartCount()
                 }
                 //이미 좋아요하지 않은 경우, 좋아요 추가하기
                 else {
                     addLikedPostID(postID)
-
                     postManager.findPostByID(postID)!!.plusHeartCount()
                 }
             }
             //하트 관련 UI 다시 설정
-            drawHeartUI()
+            setHeartUI()
         }
+    }
+
+    private fun initPreButton(){
+        preButton.setOnClickListener {
+            if(!it.isEnabled) return@setOnClickListener
+            postID++
+            Log.d(TAG, "pre button clicked, postID: ${postID}")
+            initDetailPage()
+        }
+    }
+    private fun initNextButton(){
+      nextButton.setOnClickListener {
+          if(!it.isEnabled) return@setOnClickListener
+          postID--
+          Log.d(TAG, "next button clicked, postID: ${postID}")
+          initDetailPage()
+      }
     }
 }

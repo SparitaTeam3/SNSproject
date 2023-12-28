@@ -40,7 +40,7 @@ class PostManager private constructor(){
             image = Uri.parse("drawable://" + R.drawable.post_img_example2))
     }
 
-    fun getCurrentDateTime():String{
+    private fun getCurrentDateTime():String{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var currentDateTime = LocalDateTime.now()
             return currentDateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))
@@ -48,8 +48,8 @@ class PostManager private constructor(){
         return ""
     }
 
-    fun addNewPost(title:String, body:String, writerId:String,
-                   image:Uri? = null, location:String = "위치 정보 없음"){
+    private fun addNewPost(title:String, body:String, writerId:String,
+                           image:Uri? = null, location:String = "위치 정보 없음"){
 
         //게시물 ID 붙이기
         val postID = nextPostID++
@@ -68,6 +68,18 @@ class PostManager private constructor(){
         return recentPostList.toList()
     }
 
+    //작성된 게시물 중 가장 최신 게시물 ID 반환
+    fun getMostRecentPostID():Int?{
+        if(postList.isEmpty()) return null
+        return postList[postList.size -1].postID
+    }
+    //최신에 작성된 n개의 게시물 중 마지막 최신 게시물 ID 반환
+    fun getLeastRecentPostID(n:Int):Int?{
+        if((n == 0) || postList.isEmpty()) return null
+
+        return if(postList.size < n) postList[0].postID
+        else postList[postList.size - n].postID
+    }
     fun findPostByID(postID: Int): Post? {
         return postList.find { it.postID == postID }
     }
