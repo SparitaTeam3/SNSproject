@@ -11,9 +11,10 @@
     TODO: find why renaming the separator breaks things-->
     <ImageView
         android:id="@+id/detail_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/post_img_example1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,22 +51,11 @@
         android:background="@drawable/frame_circle"
         android:scaleType="centerInside"
         android:clipToOutline="true"
+        android:src="@drawable/default_profile"
         app:circularflow_radiusInDP="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/detail_text_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/detail_text_header"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/detail_howLongAgo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:text="1일전"
-        android:textColor="#61000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_img" />
+        app:layout_constraintTop_toTopOf="@+id/detail_text_header" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detail_text_header"
@@ -96,6 +86,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_title" />
+
+        <TextView
+            android:id="@+id/detail_howLongAgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="1일전"
+            android:textSize="12sp"
+            android:textColor="#61000000"
+            app:layout_constraintStart_toEndOf="@id/detail_name"
+            app:layout_constraintTop_toTopOf="@id/detail_name"
+            app:layout_constraintBottom_toBottomOf="@id/detail_name"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -160,7 +164,7 @@
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         android:background="@android:color/transparent"
-        android:src="@drawable/full_heart_icon"
+        android:src="@drawable/empty_heart_icon"
         app:layout_constraintBottom_toBottomOf="@+id/detail_heartNum"
         app:layout_constraintEnd_toStartOf="@+id/detail_heartNum"
         app:layout_constraintTop_toTopOf="@+id/detail_heartNum" />

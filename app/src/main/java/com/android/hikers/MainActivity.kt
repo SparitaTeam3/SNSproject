@@ -2,7 +2,6 @@ package com.android.hikers
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -74,6 +73,13 @@ class MainActivity : AppCompatActivity() {
         initWriteFloatingButton()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        //최신 게시글 다시 보이기
+        initScrollView()
+    }
+
     private fun initProfile() {
         val loginUser = userManager.findUserByID(userID)!!
         val userName = loginUser.name
@@ -126,8 +132,15 @@ class MainActivity : AppCompatActivity() {
 
             imageImageView.run {
                 if (post.image != null) {
-                    setImageURI(post.image)
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    try {
+                        setImageURI(post.image)
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+                    }
+                    catch (e:Exception){
+                        Log.d(TAG, "게시물 이미지 uri 접근 문제 발생!")
+                        setImageResource(R.drawable.hikers_icon_small_grey)
+                        scaleType = ImageView.ScaleType.CENTER
+                    }
                 } else {
                     setImageResource(R.drawable.hikers_icon_small_grey)
                     scaleType = ImageView.ScaleType.CENTER
@@ -164,11 +177,15 @@ class MainActivity : AppCompatActivity() {
                 if (loginUser.isInLikedPostIDList(postID)) {
                     heartImageView.setImageResource(R.drawable.empty_heart_icon)
                     loginUser.deleteLikedPostID(postID)
+
+                    postManager.findPostByID(postID)!!.minusHeartCount()
                 }
                 //이미 좋아요하지 않은 경우, 좋아요 추가하기
                 else {
                     heartImageView.setImageResource(R.drawable.full_heart_icon)
                     loginUser.addLikedPostID(postID)
+
+                    postManager.findPostByID(postID)!!.plusHeartCount()
                 }
             }
 
