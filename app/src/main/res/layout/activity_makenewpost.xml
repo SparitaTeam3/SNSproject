@@ -76,13 +76,13 @@
 
     <ImageButton
         android:id="@+id/btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_margin="12dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:scaleType="centerInside"
-        android:src="@drawable/close_icon"
+        android:src="@drawable/ic_close"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -110,6 +110,7 @@ class MyPage : AppCompatActivity() {
 
         //디테일 페이지에서 좋아요를 누르거나 취소한 뒤, 마이 페이지로 돌아왔을 때,
         //좋아요 여부를 반영하여 다시 UI 표시하기
+        initProfile()
         initLikedPostScrollView()
     }
 

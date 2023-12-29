@@ -76,9 +76,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         Log.d(TAG, postManager.getRecentPostList(1).toString())
-          
         //최신 게시글 다시 보이기
         initScrollView()
+        initProfile()
     }
 
     private fun initProfile() {
