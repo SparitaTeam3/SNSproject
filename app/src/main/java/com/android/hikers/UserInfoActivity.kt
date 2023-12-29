@@ -75,6 +75,8 @@ class UserInfoActivity : AppCompatActivity() {
             btnUserInfoSummitInfo.text = getString(R.string.update_user_info)
             nameValue = user?.name ?: ""
             ivUserInfoProfile.setImageURI(user?.profileImage)
+            profileImageUri = user?.profileImage
+
             etUserInfoName.setText(user?.name)
             etUserInfoIntroduce.setText(user?.introduction)
 
