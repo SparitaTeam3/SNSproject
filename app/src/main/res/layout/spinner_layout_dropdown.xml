@@ -9,4 +9,5 @@
     android:layout_height="wrap_content"
     android:minHeight="32dp"
     android:paddingStart="24dp"
+    android:background="@color/light_gray"
     android:ellipsize="marquee"/>

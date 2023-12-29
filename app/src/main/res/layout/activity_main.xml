@@ -117,6 +117,10 @@
                 <include layout="@layout/post_item_layout" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
+
         </LinearLayout>
     </ScrollView>
 

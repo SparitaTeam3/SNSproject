@@ -43,7 +43,7 @@ class MyPage : AppCompatActivity() {
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy {
-        intent.getStringExtra("userID") ?: "hong_gildong"
+        intent.getStringExtra(EXTRA_ID) ?: "hong_gildong"
     }
 
     private val myPostItemList by lazy {
@@ -139,18 +139,16 @@ class MyPage : AppCompatActivity() {
 
         val userName = loginUser.name
         val userImage = loginUser.profileImage
-        val userId = loginUser.ID
-        val userIntroduction = loginUser.introduction
+        val userId = "@ " + loginUser.ID
+        val userintroduction = loginUser.introduction
 
         name.text = userName
         id.text = userId
+        //아직 소개가 없어서 주석 처리 함
+        info.text = userintroduction
         profilePhoto.run {
             if (userImage != null) setImageURI(userImage)
             else setImageResource(R.drawable.default_profile)
-        }
-        info.run{
-            if(userIntroduction != null) text = userIntroduction
-            else setText(R.string.introduction)
         }
     }
 
@@ -294,7 +292,7 @@ class MyPage : AppCompatActivity() {
         setting.setOnClickListener {
             Log.d(TAG, "edit info button clicked")
             val editIntent = Intent(this, UserInfoActivity::class.java).apply {
-                putExtra("userID", userID)
+                putExtra(EXTRA_ID, userID)
             }
             startActivity(editIntent)
         }
