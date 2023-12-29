@@ -30,8 +30,6 @@ class MakeNewPostActivity : AppCompatActivity() {
 
     private val postManager=PostManager.newInstance()
 
-    private val userId=intent?.getStringExtra("userID") ?: ""
-
     private var imgUri: Uri? = null
 
     private val getImage=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -45,8 +43,10 @@ class MakeNewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_makenewpost)
 
+        val userId=intent.getStringExtra("userID") ?: ""
+
         closeBtnCheck()
-        uploadBtnCheck()
+        uploadBtnCheck(userId)
         imgAddBtnCheck()
 
     }
@@ -58,13 +58,14 @@ class MakeNewPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadBtnCheck(){
+    private fun uploadBtnCheck(userId: String){
         upload_btn.setOnClickListener{
             Log.d(TAG, "upload button clicked")
             val titleStr=post_title.editText?.text.toString()
             val locStr=post_loc.editText?.text.toString()
             val bodyStr=post_body.text.toString()
 
+            Log.d(TAG, "img uri: ${imgUri.toString()}")
             postManager.addNewPost(titleStr, bodyStr, userId, imgUri, locStr)
             finish()
         }

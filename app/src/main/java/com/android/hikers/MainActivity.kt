@@ -74,6 +74,15 @@ class MainActivity : AppCompatActivity() {
         initWriteFloatingButton()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        Log.d(TAG, postManager.getRecentPostList(1).toString())
+
+        initProfile()
+        initScrollView()
+    }
+
     private fun initProfile() {
         val loginUser = userManager.findUserByID(userID)!!
         val userName = loginUser.name
@@ -191,13 +200,13 @@ class MainActivity : AppCompatActivity() {
     private fun initWriteFloatingButton() {
         writeFloatingButton.setOnClickListener {
             Log.d(TAG, "write button clicked")
+            Log.d(TAG, userID)
 
             //로그인한 회원 ID 전달하며, 글쓰기 화면으로 이동
             val makeNewPostIntent = Intent(this, MakeNewPostActivity::class.java).apply {
                 putExtra("userID", userID)
             }
             startActivity(makeNewPostIntent)
-            initScrollView()
         }
     }
 }
