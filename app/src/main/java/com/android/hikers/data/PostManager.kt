@@ -50,7 +50,7 @@ class PostManager private constructor(){
         return ""
     }
 
-    private fun addNewPost(title:String, body:String, writerId:String,
+    fun addNewPost(title:String, body:String, writerId:String,
                            image:Uri? = null, location:String = "위치 정보 없음"){
 
         //게시물 ID 붙이기
