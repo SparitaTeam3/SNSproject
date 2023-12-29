@@ -2,6 +2,7 @@ package com.android.hikers
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.setPadding
+import androidx.core.widget.addTextChangedListener
 import com.android.hikers.data.Post
 import com.android.hikers.data.PostManager
 import com.android.hikers.data.UserManager
@@ -52,8 +54,12 @@ class MakeNewPostActivity : AppCompatActivity() {
         setContentView(R.layout.activity_makenewpost)
 
         val userId=intent.getStringExtra("userID") ?: ""
+        upload_btn.isEnabled=false
+        upload_btn.alpha= 0.5F
 
         closeBtnCheck()
+        textFocusCheck()
+        textErrorCheck()
         uploadBtnCheck(userId)
         imgAddBtnCheck()
 
@@ -63,6 +69,48 @@ class MakeNewPostActivity : AppCompatActivity() {
         close_btn.setOnClickListener {
             Log.d(TAG, "close button clicked")
             finish()
+        }
+    }
+
+    private fun textFocusCheck(){
+        post_title.editText?.setOnFocusChangeListener{v, hasFocus ->
+            if(post_title.editText!!.text.toString().isEmpty()){
+                when(hasFocus){
+                    true -> post_title.hint=""
+                    false -> post_title.hint="게시글 제목을 입력해주세요."
+                }
+            }
+        }
+        post_body.setOnFocusChangeListener{v, hasFocus ->
+            if(post_body.text.toString().isEmpty()){
+                when(hasFocus){
+                    true -> post_body.hint=""
+                    false -> post_body.hint="게시글 내용을 입력해주세요."
+                }
+            }
+        }
+        post_loc.editText?.setOnFocusChangeListener{v, hasFocus ->
+            if(post_loc.editText!!.text.toString().isEmpty()){
+                when(hasFocus){
+                    true -> post_loc.hint=""
+                    false -> post_loc.hint="위치 정보"
+                }
+            }
+        }
+    }
+
+    private fun textErrorCheck(){
+        post_title.editText?.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus && post_title.editText!!.text.toString().isEmpty()){
+                post_title.error="제목이 비여있으면 안됩니다."
+            }
+        }
+        post_title.editText?.addTextChangedListener { text ->
+            if(text.toString().isNotEmpty()){
+                upload_btn.isEnabled=true
+                upload_btn.alpha=1f
+                post_title.error=null
+            }
         }
     }
 
