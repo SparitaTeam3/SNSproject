@@ -34,6 +34,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:hint="@string/enter_title"
+        app:errorEnabled="true"
+        app:errorTextColor="@color/error_msg"
         app:boxStrokeColor="@color/light_gray"
         android:textColorHint="@color/material_dynamic_neutral50"
         app:boxBackgroundColor="#F7F7F7"
