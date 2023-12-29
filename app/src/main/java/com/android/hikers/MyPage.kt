@@ -146,14 +146,41 @@ class MyPage : AppCompatActivity() {
         val userId = loginUser.ID
         val userIntroduction = loginUser.introduction
 
-        if(loginUser.character.size !=0) {
-            val usercharacter1 = loginUser.character[0]
-            val usercharacter2 = loginUser.character[1]
-            val usercharacter3 = loginUser.character[2]
-            character1.text = usercharacter1
-            character2.text = usercharacter2
-            character3.text = usercharacter3
+        character1.isVisible = false
+        character2.isVisible = false
+        character3.isVisible = false
+
+        if (loginUser.character.size != 0) {
+            if (loginUser.character.size == 1) {
+                character1.isVisible = true
+                val usercharacter1 = loginUser.character[0]
+
+                character1.text = usercharacter1
+            } else if (loginUser.character.size == 2) {
+                character1.isVisible = true
+                character2.isVisible = true
+                val usercharacter1 = loginUser.character[0]
+                val usercharacter2 = loginUser.character[1]
+
+                character1.text = usercharacter1
+                character2.text = usercharacter2
+            } else if (loginUser.character.size == 3) {
+                character1.isVisible = true
+                character2.isVisible = true
+                character3.isVisible = true
+                val usercharacter1 = loginUser.character[0]
+                val usercharacter2 = loginUser.character[1]
+                val usercharacter3 = loginUser.character[2]
+
+                character1.text = usercharacter1
+                character2.text = usercharacter2
+                character3.text = usercharacter3
+            }
+
+
         }
+
+
         name.text = userName
         id.text = userId
         profilePhoto.run {
