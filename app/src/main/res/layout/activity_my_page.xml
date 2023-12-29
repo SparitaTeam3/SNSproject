@@ -93,15 +93,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_myinfo" />
 
+    <TextView
+        android:id="@+id/tv_my_post"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/no_written_posts"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tv_post"
+        />
+
     <HorizontalScrollView
-        android:id="@+id/scrollview"
+        android:id="@+id/scrollview_my_post"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="24dp"
         android:fillViewport="true"
-
         app:layout_constraintTop_toBottomOf="@+id/tv_post">
 
         <LinearLayout
@@ -110,7 +123,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/mypage_post1"
+                android:id="@+id/mypage_mypost1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -118,7 +131,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post2"
+                android:id="@+id/mypage_mypost2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -127,7 +140,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post3"
+                android:id="@+id/mypage_mypost3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -135,7 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post4"
+                android:id="@+id/mypage_mypost4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -143,7 +156,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post5"
+                android:id="@+id/mypage_mypost5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -154,8 +167,21 @@
 
     </HorizontalScrollView>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="24dp"
+        android:text="@string/no_liked_posts"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tv_like"
+        />
+
     <HorizontalScrollView
-        android:id="@+id/likescrollview"
+        android:id="@+id/scrollview_my_like"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_marginLeft="24dp"
@@ -172,7 +198,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/mypage_post6"
+                android:id="@+id/mypage_likepost1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -180,7 +206,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post7"
+                android:id="@+id/mypage_likepost2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -188,7 +214,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post8"
+                android:id="@+id/mypage_likepost3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -196,7 +222,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post9"
+                android:id="@+id/mypage_likepost4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -204,7 +230,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mypage_post10"
+                android:id="@+id/mypage_likepost5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -223,7 +249,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="220dp"
         android:text="@string/like"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_post" />
@@ -235,21 +261,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="50dp"
         android:text="@string/record"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_profile" />
-
-    <TextView
-        android:id="@+id/tv_no_recent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:layout_weight="1"
-        android:text="@string/no_post"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
