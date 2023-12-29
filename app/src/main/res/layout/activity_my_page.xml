@@ -16,7 +16,7 @@
         android:background="#00ff0000"
         android:padding="0sp"
         android:scaleType="centerCrop"
-        android:src="@drawable/x"
+        android:src="@drawable/ic_x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
         android:layout_marginEnd="24dp"
         android:background="#00ff0000"
         android:drawableLeft="@drawable/drawable_setting"
-        android:text="회원정보 수정"
+        android:text="@string/edit_myinfo"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +40,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/default_profile"
+        android:transitionName="@string/trans_profile_image"
         app:civ_border_color="@color/black"
-        app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
@@ -50,8 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="10dp"
-        android:text="이름"
+        android:layout_marginTop="15dp"
+        android:text="@string/name"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginTop="5dp"
-        android:text="idid1234"
+        android:text="@string/id"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
@@ -71,13 +71,13 @@
     <TextView
         android:id="@+id/tv_myinfo"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginStart="150dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+        android:text="@string/introduction"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,18 +88,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:text="더보기"
+        android:text="@string/more"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_myinfo" />
 
-    <HorizontalScrollView
-        android:id="@+id/scrollview"
+
+    <TextView
+        android:id="@+id/tv_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/record"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_profile"
+        app:layout_constraintBottom_toTopOf="@id/scrollview_my_post"/>
+
+
+    <TextView
+        android:id="@+id/tv_no_my_post"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_margin="24dp"
-        android:fillViewport="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/no_written_posts"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tv_post"
+        />
 
+    <HorizontalScrollView
+        android:id="@+id/scrollview_my_post"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="24dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@+id/tv_post">
 
         <LinearLayout
@@ -108,7 +138,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/mypage_post1"
+                android:id="@+id/mypage_mypost1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -116,7 +146,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/post_item2"
+                android:id="@+id/mypage_mypost2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -125,7 +155,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/post_item3"
+                android:id="@+id/mypage_mypost3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -133,7 +163,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/post_item4"
+                android:id="@+id/mypage_mypost4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -141,74 +171,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/post_item5"
+                android:id="@+id/mypage_mypost5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <include layout="@layout/mypage_post_layout" />
             </LinearLayout>
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:id="@+id/likescrollview"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_margin="24dp"
-        android:layout_marginBottom="24dp"
-        android:fillViewport="true"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_like"
-        tools:layout_editor_absoluteX="24dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/mypage_post6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/mypage_post_layout" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mypage_post7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/mypage_post_layout" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mypage_post8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/mypage_post_layout" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mypage_post9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/mypage_post_layout" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mypage_post10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/mypage_post_layout" />
-            </LinearLayout>
-
 
         </LinearLayout>
 
@@ -219,34 +187,85 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="250dp"
-        android:text="좋아요"
-        android:textSize="25sp"
+        android:text="@string/like"
+        android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_marginTop="210dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_post" />
+        app:layout_constraintTop_toBottomOf="@id/tv_post" />
 
     <TextView
-        android:id="@+id/tv_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
-        android:text="기록"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+        android:id="@+id/tv_no_liked_post"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="24dp"
+        android:text="@string/no_liked_posts"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tv_like"
+        />
 
-    <TextView
-        android:id="@+id/tv_no_recent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:layout_weight="1"
-        android:text="@string/no_post"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <HorizontalScrollView
+        android:id="@+id/scrollview_my_like"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_like">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/mypage_likepost1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/mypage_post_layout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mypage_likepost2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/mypage_post_layout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mypage_likepost3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/mypage_post_layout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mypage_likepost4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/mypage_post_layout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mypage_likepost5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/mypage_post_layout" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

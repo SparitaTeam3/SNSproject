@@ -32,15 +32,17 @@ class PostManager private constructor(){
             "5박6일 히말라야 트래킹에 다녀왔어요.\n풍경도 좋고 걸으며 마음이 많이 편해졌답니다.\n걷는 걸 좋아하시는 분들은 꼭 한 번 다녀오시길 바랍니다!",
             "kim_chulsoo",
             location = "히말라야",
-            image = Uri.parse("drawable://" + R.drawable.post_img_example1))
+            image = Uri.parse("android.resource://com.android.hikers/"+R.drawable.post_img_example1))
+            //image = Uri.parse("drawable://" + R.drawable.post_img_example1))
 
         addNewPost("여기가 어느 산인지 아시는 분 계신가요?",
-            "인터넷에서 본 사진인데요 여이가 어느 산인지 모르겠어요.ㅜㅜ\n여기가 어딘지 아시는 분 있다면 꼭 댓글 달아주세요!\n",
+            "인터넷에서 본 사진인데요 여기가 어느 산인지 모르겠어요.ㅜㅜ\n여기가 어딘지 아시는 분 있다면 꼭 댓글 달아주세요!\n",
             "lee_younghee",
-            image = Uri.parse("drawable://" + R.drawable.post_img_example2))
+            image = Uri.parse("android.resource://com.android.hikers/"+R.drawable.post_img_example2))
+            //image = Uri.parse("drawable://" + R.drawable.post_img_example2))
     }
 
-    fun getCurrentDateTime():String{
+    private fun getCurrentDateTime():String{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var currentDateTime = LocalDateTime.now()
             return currentDateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))
@@ -48,8 +50,8 @@ class PostManager private constructor(){
         return ""
     }
 
-    fun addNewPost(title:String, body:String, writerId:String,
-                   image:Uri? = null, location:String = "위치 정보 없음"){
+    private fun addNewPost(title:String, body:String, writerId:String,
+                           image:Uri? = null, location:String = "위치 정보 없음"){
 
         //게시물 ID 붙이기
         val postID = nextPostID++
@@ -66,5 +68,21 @@ class PostManager private constructor(){
             recentPostList.add(postList[postList.size -1 -i])
         }
         return recentPostList.toList()
+    }
+
+    //작성된 게시물 중 가장 최신 게시물 ID 반환
+    fun getMostRecentPostID():Int?{
+        if(postList.isEmpty()) return null
+        return postList[postList.size -1].postID
+    }
+    //최신에 작성된 n개의 게시물 중 마지막 최신 게시물 ID 반환
+    fun getLeastRecentPostID(n:Int):Int?{
+        if((n == 0) || postList.isEmpty()) return null
+
+        return if(postList.size < n) postList[0].postID
+        else postList[postList.size - n].postID
+    }
+    fun findPostByID(postID: Int): Post? {
+        return postList.find { it.postID == postID }
     }
 }

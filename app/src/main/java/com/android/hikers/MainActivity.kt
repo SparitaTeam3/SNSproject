@@ -2,7 +2,6 @@ package com.android.hikers
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -52,8 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy {
-        "lee_younghee"
-        //intent.getStringExtra("userID") ?: ""
+        intent.getStringExtra(EXTRA_ID) ?: "lee_younghee"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,8 +76,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         Log.d(TAG, postManager.getRecentPostList(1).toString())
-
-        initProfile()
+          
+        //최신 게시글 다시 보이기
         initScrollView()
     }
 
@@ -90,10 +88,23 @@ class MainActivity : AppCompatActivity() {
 
         userGreetingTextView.text = getString(R.string.user_greeting, userName)
         userProfileImageView.run {
-            if (userImage != null) setImageURI(userImage)
-            else setImageResource(R.drawable.default_profile)
+            if (userImage != null){
+                try{
+                    Log.d(TAG, "user profile image uri is not null")
+                    setImageURI(userImage)
+                }
+                catch(e:Exception){
+                    Log.d(TAG, "프로필 이미지 uri 접근 문제 발생!")
+                    setImageResource(R.drawable.default_profile)
+                }
+            }
+            else {
+                Log.d(TAG, "user profile image uri is null")
+                setImageResource(R.drawable.default_profile)
+            }
         }
     }
+
 
     private fun initProfileImageView() {
         userProfileImageView.setOnClickListener {
@@ -102,7 +113,12 @@ class MainActivity : AppCompatActivity() {
             val profileIntent = Intent(this, MyPage::class.java).apply {
                 putExtra("userID", userID)
             }
-            startActivity(profileIntent)
+
+            //공유 요소가 있는 화면 애니메이션 만들기
+            val options = ActivityOptions
+                .makeSceneTransitionAnimation(this, userProfileImageView, resources.getString(R.string.trans_profile_image))
+
+            startActivity(profileIntent, options.toBundle())
         }
     }
 
@@ -134,9 +150,18 @@ class MainActivity : AppCompatActivity() {
 
             imageImageView.run {
                 if (post.image != null) {
-                    setImageURI(post.image)
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    try {
+                        Log.d(TAG, "postID: ${post.postID}, image uri is not null")
+                        setImageURI(post.image)
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+                    }
+                    catch (e:Exception){
+                        Log.d(TAG, "게시물 이미지 uri 접근 문제 발생!")
+                        setImageResource(R.drawable.hikers_icon_small_grey)
+                        scaleType = ImageView.ScaleType.CENTER
+                    }
                 } else {
+                    Log.d(TAG, "postID: ${post.postID}, image uri is null")
                     setImageResource(R.drawable.hikers_icon_small_grey)
                     scaleType = ImageView.ScaleType.CENTER
                 }
@@ -172,11 +197,15 @@ class MainActivity : AppCompatActivity() {
                 if (loginUser.isInLikedPostIDList(postID)) {
                     heartImageView.setImageResource(R.drawable.empty_heart_icon)
                     loginUser.deleteLikedPostID(postID)
+
+                    postManager.findPostByID(postID)!!.minusHeartCount()
                 }
                 //이미 좋아요하지 않은 경우, 좋아요 추가하기
                 else {
                     heartImageView.setImageResource(R.drawable.full_heart_icon)
                     loginUser.addLikedPostID(postID)
+
+                    postManager.findPostByID(postID)!!.plusHeartCount()
                 }
             }
 
@@ -185,14 +214,21 @@ class MainActivity : AppCompatActivity() {
                 val postID = postItemIDMap[postItem.id]
                 Log.d(TAG, "post item clicked) post id: ${postID}")
 
-                if (postID == -1) return@setOnClickListener
+                if(postID == -1) return@setOnClickListener
 
                 //로그인한 회원 ID와 게시물 ID 전달하며, 디테일 화면으로 이동
-                val detailIntent = Intent(this, DetailPageActivity::class.java).apply {
+                val detailIntent = Intent(this, DetailPageActivity::class.java).apply{
                     putExtra("userID", userID)
                     putExtra("postID", postID)
                 }
-                startActivity(detailIntent)
+
+                //메인 화면과 디테일 화면의 공유 요소
+                val postImageView = postItem.findViewById<ImageView>(R.id.iv_img)
+                //공유 요소가 있는 화면 애니메이션 만들기
+                val options = ActivityOptions
+                    .makeSceneTransitionAnimation(this, postImageView,getString(R.string.trans_post_image))
+
+                startActivity(detailIntent, options.toBundle())
             }
         }
     }

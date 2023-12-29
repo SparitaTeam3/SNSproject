@@ -41,9 +41,10 @@
             android:layout_height="40dp"
             android:scaleType="centerCrop"
             android:src="@drawable/default_profile"
+            android:transitionName="@string/trans_profile_image"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -52,8 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_post"
-        android:visibility="gone"
         android:textSize="12sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,30 +81,39 @@
                 android:id="@+id/post_item1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <include layout="@layout/post_item_layout" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/post_item2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <include layout="@layout/post_item_layout" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/post_item3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <include layout="@layout/post_item_layout" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/post_item4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <include layout="@layout/post_item_layout" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/post_item5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <include layout="@layout/post_item_layout" />
             </LinearLayout>
 
@@ -114,10 +124,9 @@
         android:id="@+id/floating_btn_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabCustomSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/theme_green1"
         android:src="@drawable/write_icon"
-        />
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,4 +11,10 @@ data class Post(val postID:Int,
                 val image: Uri? = null,
                 val location:String = "위치 정보 없음"
                 ) {
+    fun plusHeartCount() {
+        heartCount++
+    }
+    fun minusHeartCount() {
+        heartCount--
+    }
 }

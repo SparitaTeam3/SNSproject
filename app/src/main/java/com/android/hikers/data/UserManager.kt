@@ -1,6 +1,7 @@
 package com.android.hikers.data
 
 import android.net.Uri
+import com.android.hikers.R
 
 class UserManager private constructor() {
     private val userList = mutableListOf<User>()
@@ -19,11 +20,12 @@ class UserManager private constructor() {
         addNewUser("hong_gildong", "aaaaaaaa!", "홍길동")
         addNewUser("kim_chulsoo", "aaaaaaaa!", "김철수")
         addNewUser("lee_younghee", "aaaaaaaa!", "이영희")
+        addNewUser("aa", "aaaaaaaa!", "aa")
     }
 
     fun addNewUser(
         ID: String, password: String, name: String,
-        image: Uri? = null,
+        image: Uri = Uri.parse("drawable://" + R.drawable.default_profile),
         introduction: String = "",
         personality: MutableList<String> = mutableListOf<String>()
     ) {
@@ -43,5 +45,18 @@ class UserManager private constructor() {
             if ((it.ID == ID) && (it.password == password)) return true
         }
         return false
+    }
+
+    fun changeUserInfo(
+        id: String,
+        newName: String,
+        newIntro: String,
+        newCharacter: MutableList<String>,
+        newProfileImage: Uri?
+    ) {
+        findUserByID(id)?.name = newName
+        findUserByID(id)?.introduction = newIntro
+        findUserByID(id)?.character = newCharacter
+        findUserByID(id)?.profileImage = newProfileImage
     }
 }
