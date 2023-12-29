@@ -29,6 +29,8 @@
         android:inputType="textVisiblePassword"
         android:maxLines="1"
         android:paddingHorizontal="12dp"
+        android:textColor="@color/theme_green2"
+        android:textColorHint="@color/hint_green"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/iv_sign_up_title" />
 
@@ -42,6 +44,8 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:paddingHorizontal="12dp"
+        android:textColor="@color/theme_green2"
+        android:textColorHint="@color/hint_green"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/et_sign_up_id" />
 
@@ -55,6 +59,8 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:paddingHorizontal="12dp"
+        android:textColor="@color/theme_green2"
+        android:textColorHint="@color/hint_green"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/et_sign_up_pw" />
 
@@ -103,7 +109,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/default_button_disable"
-        android:text="다음"
+        android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_up_check_pw_error_msg" />

@@ -116,6 +116,44 @@
 
                 <include layout="@layout/post_item_layout" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/post_item6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/post_item7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/post_item8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/post_item9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/post_item10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/post_item_layout" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
 
         </LinearLayout>
     </ScrollView>

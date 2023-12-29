@@ -1,0 +1,57 @@
+<resources>
+
+    <string name="app_name">Hikers</string>
+    <!--  로그인 화면  -->
+    <string name="id">ID</string>
+    <string name="login">Login</string>
+    <string name="not_member">Are you not a member yet?</string>
+    <string name="sign_up">Join</string>
+    <string name="password">Password</string>
+    <string name="check_password">Confirm Password</string>
+    <string name="name">Name</string>
+    <string name="next">Next</string>
+
+    <string name="plz_input_id">Please enter your ID</string>
+    <string name="plz_input_pw">Please enter your password</string>
+    <string name="plz_check_pw">Please confirm your password</string>
+    <string name="plz_input_name">Please enter your name</string>
+    <string name="no_exist_id">The ID you entered is not registered</string>
+    <string name="already_exist_id">The ID is already registered</string>
+    <string name="not_match_pw">The password is incorrect</string>
+    <string name="diffrent_pw_check">The password information does not match</string>
+    <string name="id_use_eng_num">"Please use only letters and numbers for the ID</string>
+    <string name="pw_more_eight">Please create a password with at least 8 characters</string>
+    <string name="pw_must_have_special">Please include a special character in your password</string>
+
+    <!--  회원정보 화면  -->
+    <string name="plz_type_introduce">Please enter a self-introduction</string>
+    <string name="update_user_info">Update Info</string>
+    <string name="summit_sign_up">Sign up</string>
+
+    <!--  메인 화면  -->
+    <string name="user_greeting">Hello, %s!</string>
+    <string name="no_post">There are no recent posts</string>
+    <string name="post_title">Post Title</string>
+    <string name="post_location">Location</string>
+    <string name="post_writer_name">Author</string>
+    <string name="post_time">Creation Time</string>
+
+    <!-- 마이페이지 화면 -->
+    <string name="edit_myinfo">Edit Member Info</string>
+    <string name="introduction">Introduction</string>
+    <string name="more">more</string>
+    <string name="record">My Post</string>
+    <string name="like">Like</string>
+    <string name="no_written_posts">There are no posts that I have written</string>
+    <string name="no_liked_posts">There are no posts that I have liked</string>
+
+    <!--  글쓰기 화면  -->
+    <string name="enter_title">Please enter the title of the post.</string>
+    <string name="enter_body">Please enter the content of the post.</string>
+    <string name="upload_post">Upload</string>
+
+    <!--  애니메이션 공유 요소 이름  -->
+    <string name="trans_post_image">post_image</string>
+    <string name="trans_profile_image">profile_image</string>
+
+</resources>

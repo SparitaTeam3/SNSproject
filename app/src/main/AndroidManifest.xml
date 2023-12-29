@@ -17,7 +17,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".UserInfoActivity"
             android:exported="false" />
@@ -26,10 +27,10 @@
             android:exported="false" />
         <activity
             android:name=".MakeNewPostActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -37,7 +38,7 @@
         </activity>
         <activity
             android:name=".DetailPageActivity"
-            android:exported="false"/>
+            android:exported="false" />
 
     </application>
 

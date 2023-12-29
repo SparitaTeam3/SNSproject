@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="characters">
+        <item>Please select a keyword</item>
+        <item>Passionate</item>
+        <item>Extroverted</item>
+        <item>Calm</item>
+        <item>Affectionate</item>
+        <item>Good sense</item>
+        <item>Charming</item>
+        <item>Funny</item>
+        <item>Bold</item>
+        <item>Sophisticated</item>
+        <item>Expert</item>
+        <item>Sensuous</item>
+        <item>Adventurous</item>
+        <item>Emotional</item>
+        <item>Humble</item>
+    </string-array>
+</resources>

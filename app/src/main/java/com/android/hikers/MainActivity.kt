@@ -31,7 +31,12 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.post_item2),
             findViewById(R.id.post_item3),
             findViewById(R.id.post_item4),
-            findViewById(R.id.post_item5)
+            findViewById(R.id.post_item5),
+            findViewById(R.id.post_item6),
+            findViewById(R.id.post_item7),
+            findViewById(R.id.post_item8),
+            findViewById(R.id.post_item9),
+            findViewById(R.id.post_item10)
         )
     }
 
@@ -42,7 +47,12 @@ class MainActivity : AppCompatActivity() {
             R.id.post_item2 to -1,
             R.id.post_item3 to -1,
             R.id.post_item4 to -1,
-            R.id.post_item5 to -1
+            R.id.post_item5 to -1,
+            R.id.post_item6 to -1,
+            R.id.post_item7 to -1,
+            R.id.post_item8 to -1,
+            R.id.post_item9 to -1,
+            R.id.post_item10 to -1
         )
     }
 
@@ -76,9 +86,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         Log.d(TAG, postManager.getRecentPostList(1).toString())
-          
         //최신 게시글 다시 보이기
         initScrollView()
+        initProfile()
     }
 
     private fun initProfile() {
@@ -111,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "profile image clicked")
             //로그인한 회원 ID 전달하며, 마이페이지 화면으로 이동
             val profileIntent = Intent(this, MyPage::class.java).apply {
-                putExtra("userID", userID)
+                putExtra(EXTRA_ID, userID)
             }
 
             //공유 요소가 있는 화면 애니메이션 만들기
@@ -124,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initScrollView() {
         postItemList.forEach { it.isVisible = false }
-        val recentPostList = postManager.getRecentPostList(3)
+        val recentPostList = postManager.getRecentPostList(10)
 
         //최신 글이 없는 경우
         if (recentPostList.isEmpty()) {

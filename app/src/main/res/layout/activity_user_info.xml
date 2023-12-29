@@ -28,9 +28,8 @@
             android:layout_height="24dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/frame_circle"
-            android:backgroundTint="#00E664"
-            android:elevation="10dp"
+            android:background="@drawable/button_add"
+            android:elevation="15dp"
             android:shadowColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/iv_user_info_profile"
             app:layout_constraintEnd_toEndOf="@id/iv_user_info_profile" />
@@ -50,8 +49,10 @@
                 android:layout_height="32dp"
                 android:background="@drawable/edit_text_background"
                 android:hint="@string/name"
-                android:singleLine="true"
                 android:paddingHorizontal="12dp"
+                android:singleLine="true"
+                android:textColor="@color/theme_green2"
+                android:textColorHint="@color/hint_green"
                 android:textSize="12sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,6 +78,8 @@
                 android:gravity="top"
                 android:hint="@string/plz_type_introduce"
                 android:padding="12dp"
+                android:textColor="@color/theme_green2"
+                android:textColorHint="@color/hint_green"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_info_name_error_msg" />
 

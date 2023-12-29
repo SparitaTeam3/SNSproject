@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.android.hikers.data.UserManager
@@ -22,12 +23,20 @@ import com.android.hikers.messages.ErrorMsg
 
 class UserInfoActivity : AppCompatActivity() {
     private val ivUserInfoProfile by lazy { findViewById<ImageView>(R.id.iv_user_info_profile) }
+    private val btnUserInfoChangeProfile by lazy { findViewById<Button>(R.id.btn_user_info_change_profile) }
     private val etUserInfoName by lazy { findViewById<EditText>(R.id.et_user_info_name) }
     private val tvUserInfoNameErrorMsg by lazy { findViewById<TextView>(R.id.tv_user_info_name_error_msg) }
     private val etUserInfoIntroduce by lazy { findViewById<EditText>(R.id.et_user_info_introduce) }
-    private val spnUserInfoCharacter1 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_1) }
-    private val spnUserInfoCharacter2 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_2) }
-    private val spnUserInfoCharacter3 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_3) }
+    private val spiners by lazy {
+        arrayListOf(
+            findViewById<Spinner>(R.id.spn_user_info_character_1),
+            findViewById<Spinner>(R.id.spn_user_info_character_2),
+            findViewById<Spinner>(R.id.spn_user_info_character_3)
+        )
+    }
+//    private val spnUserInfoCharacter1 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_1) }
+//    private val spnUserInfoCharacter2 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_2) }
+//    private val spnUserInfoCharacter3 by lazy { findViewById<Spinner>(R.id.spn_user_info_character_3) }
     private val btnUserInfoSummitInfo by lazy { findViewById<Button>(R.id.btn_user_info_summit_info) }
     private val userManager = UserManager.newInstance()
     private lateinit var idValue: String
@@ -37,19 +46,43 @@ class UserInfoActivity : AppCompatActivity() {
     private var userNameInput = false
     private var userCharacterValue = MutableList(3) { "" }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
         setValue()
         setup()
-
     }
 
     private fun setup() {
+        initSpinner()
+        checkNewUser()
         initButton()
         initInputFields()
-        initSpinner()
+    }
+
+    private fun checkNewUser() {
+        if (!userManager.checkUserExist(idValue)) {
+            btnUserInfoSummitInfo.text = getString(R.string.summit_sign_up)
+        } else {
+            val user = userManager.findUserByID(idValue)
+            val characterArray = resources.getStringArray(R.array.characters)
+            var userCharacter = user?.character ?: arrayListOf(0, 0, 0)
+
+            for (i in 0..userCharacter.lastIndex) {
+                spiners[i].setSelection(characterArray.indexOf(userCharacter[i]))
+            }
+
+            btnUserInfoSummitInfo.text = getString(R.string.update_user_info)
+            nameValue = user?.name ?: ""
+            ivUserInfoProfile.setImageURI(user?.profileImage)
+            etUserInfoName.setText(user?.name)
+            etUserInfoIntroduce.setText(user?.introduction)
+
+            if (nameValue.isNotEmpty()) {
+                btnUserInfoSummitInfo.background = getDrawable(R.drawable.default_button_enable)
+                userNameInput = true
+            }
+        }
     }
 
     private fun setValue() {
@@ -85,12 +118,19 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun setProfileImage() {
+        btnUserInfoChangeProfile.setOnClickListener()
+        ivUserInfoProfile.setOnClickListener()
+    }
+
+    private fun View.setOnClickListener() {
         val pickImageLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     profileImageUri = result.data?.data
                     grantUriPermission(
-                        "com.android.hikers", profileImageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        "com.android.hikers",
+                        profileImageUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
                     ivUserInfoProfile?.run {
                         scaleType = ImageView.ScaleType.CENTER_CROP
@@ -98,7 +138,7 @@ class UserInfoActivity : AppCompatActivity() {
                     }
                 }
             }
-        ivUserInfoProfile.setOnClickListener {
+        setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
 
             intent.type = "image/*"
@@ -140,9 +180,9 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun initSpinner() {
-        initArrayAdapter(spnUserInfoCharacter1, 0)
-        initArrayAdapter(spnUserInfoCharacter2, 1)
-        initArrayAdapter(spnUserInfoCharacter3, 2)
+        initArrayAdapter(spiners[0], 0)
+        initArrayAdapter(spiners[1], 1)
+        initArrayAdapter(spiners[2], 2)
     }
 
     private fun initArrayAdapter(spinner: Spinner, index: Int) {
