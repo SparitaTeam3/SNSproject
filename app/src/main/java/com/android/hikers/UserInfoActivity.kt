@@ -67,7 +67,7 @@ class UserInfoActivity : AppCompatActivity() {
             val animShake = AnimationUtils.loadAnimation(this, R.anim.shake_error)
 
             if (!userNameInput) {
-                tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.msg[0], etUserInfoName)
+                tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.show(this, 0), etUserInfoName)
                 tvUserInfoNameErrorMsg.startAnimation(animShake)
                 return@setOnClickListener
             }
@@ -108,7 +108,7 @@ class UserInfoActivity : AppCompatActivity() {
 
     private fun inspectName() {
         etUserInfoName.apply {
-            leaveEmpty(tvUserInfoNameErrorMsg, ErrorMsg.NAME.msg[0])
+            leaveEmpty(tvUserInfoNameErrorMsg, ErrorMsg.NAME.show(context, 0))
             doAfterTextChanged {
                 nameValue = etUserInfoName.text.toString()
 
@@ -120,7 +120,7 @@ class UserInfoActivity : AppCompatActivity() {
                 }
 
                 if (nameValue.isEmpty()) {
-                    tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.msg[0], this)
+                    tvUserInfoNameErrorMsg.showErrMsg(ErrorMsg.NAME.show(context, 0), this)
                     btnUserInfoSummitInfo.background =
                         getDrawable(R.drawable.default_button_disable)
                     userNameInput = false
