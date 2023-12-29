@@ -158,7 +158,7 @@ class DetailPageActivity : AppCompatActivity() {
         }
 
         //다음 게시물이 없는 경우, 다음 버튼 disable
-        val leastRecentPostID = postManager.getLeastRecentPostID(3)
+        val leastRecentPostID = postManager.getLeastRecentPostID(10)
         Log.d(TAG, "set next button, leastRecentPostID: ${leastRecentPostID?: "null"}")
         nextButton.run{
             if((leastRecentPostID == null)||(postID == leastRecentPostID)){
