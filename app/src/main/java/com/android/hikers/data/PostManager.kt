@@ -50,15 +50,16 @@ class PostManager private constructor(){
         return ""
     }
 
-    fun addNewPost(title:String, body:String, writerId:String, image:Uri? = null, location:String = "위치 정보 없음"){
-
-
+    //새 게시물 생성 후, 생성된 게시물 ID 반환
+    fun addNewPost(title:String, body:String, writerId:String, image:Uri? = null, location:String = "위치 정보 없음"):Int{
         //게시물 ID 붙이기
         val postID = nextPostID++
         //게시물 게시된 시간 구하기
         var writtenTime = getCurrentDateTime()
         //새 게시물 생성하기
         postList.add(Post(postID, title, body, writerId, writtenTime, image = image, location = location))
+
+        return postID
     }
 
     //최신에 작성된 n개의 게시물 List 반환

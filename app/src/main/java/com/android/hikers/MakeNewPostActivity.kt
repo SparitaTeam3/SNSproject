@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.setPadding
 import com.android.hikers.data.Post
 import com.android.hikers.data.PostManager
+import com.android.hikers.data.UserManager
 import com.google.android.material.textfield.TextInputLayout
 
 class MakeNewPostActivity : AppCompatActivity() {
@@ -28,7 +29,8 @@ class MakeNewPostActivity : AppCompatActivity() {
     private val img_add_btn: ImageButton by lazy { findViewById(R.id.btn_imgAdd) }
     private val post_img: ImageView by lazy { findViewById(R.id.img_post) }
 
-    private val postManager=PostManager.newInstance()
+    private val postManager = PostManager.newInstance()
+    private val userManager= UserManager.newInstance()
 
     private var imgUri: Uri? = null
 
@@ -66,7 +68,9 @@ class MakeNewPostActivity : AppCompatActivity() {
             val bodyStr=post_body.text.toString()
 
             Log.d(TAG, "img uri: ${imgUri.toString()}")
-            postManager.addNewPost(titleStr, bodyStr, userId, imgUri, locStr)
+            val newPostID = postManager.addNewPost(titleStr, bodyStr, userId, imgUri, locStr)
+            userManager.findUserByID(userId)!!.addWrittenPostID(newPostID)
+
             finish()
         }
     }
