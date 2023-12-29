@@ -40,6 +40,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/default_profile"
+        android:transitionName="@string/trans_profile_image"
         app:civ_border_color="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_back" />
@@ -97,8 +98,8 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="24dp"
         android:fillViewport="true"
 
         app:layout_constraintTop_toBottomOf="@+id/tv_post">
@@ -157,9 +158,9 @@
         android:id="@+id/likescrollview"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_marginRight="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="-40dp"
+        android:layout_marginRight="24dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_like"

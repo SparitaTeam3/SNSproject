@@ -99,7 +99,12 @@ class MainActivity : AppCompatActivity() {
             val profileIntent = Intent(this, MyPage::class.java).apply {
                 putExtra("userID", userID)
             }
-            startActivity(profileIntent)
+
+            //공유 요소가 있는 화면 애니메이션 만들기
+            val options = ActivityOptions
+                .makeSceneTransitionAnimation(this, userProfileImageView, resources.getString(R.string.trans_profile_image))
+
+            startActivity(profileIntent, options.toBundle())
         }
     }
 
