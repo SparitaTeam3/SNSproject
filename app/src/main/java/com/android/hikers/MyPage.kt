@@ -32,9 +32,9 @@ class MyPage : AppCompatActivity() {
     private val info: TextView by lazy { findViewById(R.id.tv_myinfo) }
     private val more: TextView by lazy { findViewById(R.id.view_more) }
 
-    private val myPostScrollView: HorizontalScrollView by lazy { findViewById(R.id.scrollview) }
+    private val myPostScrollView: HorizontalScrollView by lazy { findViewById(R.id.scrollview_my_post) }
     private val noWrittenPostTextView: TextView by lazy { findViewById(R.id.tv_no_my_post) }
-    private val likedPostScrollView: HorizontalScrollView by lazy { findViewById(R.id.likescrollview) }
+    private val likedPostScrollView: HorizontalScrollView by lazy { findViewById(R.id.scrollview_my_like) }
     private val noLikedPostTextView: TextView by lazy { findViewById(R.id.tv_no_liked_post) }
 
     private val userManager = UserManager.newInstance()
@@ -42,8 +42,7 @@ class MyPage : AppCompatActivity() {
 
     //현재 로그인 한 유저의 아이디
     private val userID by lazy {
-        "lee_younghee"
-        //intent.getStringExtra("userID") ?: ""
+        intent.getStringExtra("userID") ?: "hong_gildong"
     }
 
     private val myPostItemList by lazy {
@@ -128,18 +127,21 @@ class MyPage : AppCompatActivity() {
 
     private fun initProfile() {
         val loginUser = userManager.findUserByID(userID)!!
+
         val userName = loginUser.name
         val userImage = loginUser.profileImage
         val userId = loginUser.ID
-        val userintroduction = loginUser.introduction
+        val userIntroduction = loginUser.introduction
 
         name.text = userName
         id.text = userId
-        //아직 소개가 없어서 주석 처리 함
-        //introduction.text = userintroduction
         profilePhoto.run {
-//            if (userImage != null) setImageURI(userImage)
-//            else setImageResource(R.drawable.default_profile)
+            if (userImage != null) setImageURI(userImage)
+            else setImageResource(R.drawable.default_profile)
+        }
+        info.run{
+            if(userIntroduction != null) text = userIntroduction
+            else setText(R.string.introduction)
         }
     }
 
