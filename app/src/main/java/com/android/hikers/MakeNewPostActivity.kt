@@ -76,7 +76,7 @@ class MakeNewPostActivity : AppCompatActivity() {
             if(post_title.editText!!.text.toString().isEmpty()){
                 when(hasFocus){
                     true -> post_title.hint=""
-                    false -> post_title.hint="게시글 제목을 입력해주세요."
+                    false -> post_title.hint=getString(R.string.enter_title)
                 }
             }
         }
@@ -84,7 +84,7 @@ class MakeNewPostActivity : AppCompatActivity() {
             if(post_body.text.toString().isEmpty()){
                 when(hasFocus){
                     true -> post_body.hint=""
-                    false -> post_body.hint="게시글 내용을 입력해주세요."
+                    false -> post_body.hint=getString(R.string.enter_body)
                 }
             }
         }
@@ -92,7 +92,7 @@ class MakeNewPostActivity : AppCompatActivity() {
             if(post_loc.editText!!.text.toString().isEmpty()){
                 when(hasFocus){
                     true -> post_loc.hint=""
-                    false -> post_loc.hint="위치 정보"
+                    false -> post_loc.hint=getString(R.string.post_location)
                 }
             }
         }
@@ -101,7 +101,7 @@ class MakeNewPostActivity : AppCompatActivity() {
     private fun textErrorCheck(){
         post_title.editText?.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus && post_title.editText!!.text.toString().isEmpty()){
-                post_title.error="제목이 비여있으면 안됩니다."
+                post_title.error=getString(R.string.title_error)
             }
         }
         post_title.editText?.addTextChangedListener { text ->
