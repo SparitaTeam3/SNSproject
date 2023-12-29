@@ -37,6 +37,10 @@ class MyPage : AppCompatActivity() {
     private val noWrittenPostTextView: TextView by lazy { findViewById(R.id.tv_no_my_post) }
     private val likedPostScrollView: HorizontalScrollView by lazy { findViewById(R.id.scrollview_my_like) }
     private val noLikedPostTextView: TextView by lazy { findViewById(R.id.tv_no_liked_post) }
+    private val character1: TextView by lazy { findViewById(R.id.tv_character1) }
+    private val character2: TextView by lazy { findViewById(R.id.tv_character2) }
+    private val character3: TextView by lazy { findViewById(R.id.tv_character3) }
+
 
     private val userManager = UserManager.newInstance()
     private val postManager = PostManager.newInstance()
@@ -142,14 +146,22 @@ class MyPage : AppCompatActivity() {
         val userId = loginUser.ID
         val userIntroduction = loginUser.introduction
 
+        if(loginUser.character.size !=0) {
+            val usercharacter1 = loginUser.character[0]
+            val usercharacter2 = loginUser.character[1]
+            val usercharacter3 = loginUser.character[2]
+            character1.text = usercharacter1
+            character2.text = usercharacter2
+            character3.text = usercharacter3
+        }
         name.text = userName
         id.text = userId
         profilePhoto.run {
             if (userImage != null) setImageURI(userImage)
             else setImageResource(R.drawable.default_profile)
         }
-        info.run{
-            if(userIntroduction != null) text = userIntroduction
+        info.run {
+            if (userIntroduction != null) text = userIntroduction
             else setText(R.string.introduction)
         }
     }
@@ -172,7 +184,7 @@ class MyPage : AppCompatActivity() {
         //내가 작성한 게시물 중 최근에 작성한 5개의 게시물만 표시하기
         for (index in 0 until min(5, myPostIDList.size)) {
             //표시할 게시물 ID
-            val postID = myPostIDList[myPostIDList.size -1 -index]
+            val postID = myPostIDList[myPostIDList.size - 1 - index]
             //게시물이 표시될 postItem 레이아웃
             val postItem = myPostItemList[index]
 
@@ -186,7 +198,7 @@ class MyPage : AppCompatActivity() {
         val likedPostIDList = loginUser.likedPostIDList
 
         Log.d(TAG, "userID: ${userID}, likedPostList: ")
-        for(postID in likedPostIDList){
+        for (postID in likedPostIDList) {
             Log.d(TAG, "$postID")
         }
 
@@ -203,7 +215,7 @@ class MyPage : AppCompatActivity() {
         //내가 좋아한 게시물 중 최근에 작성한 5개의 게시물만 표시하기
         for (index in 0 until min(5, likedPostIDList.size)) {
             //표시할 게시물 ID
-            val postID = likedPostIDList[likedPostIDList.size - 1 -index]
+            val postID = likedPostIDList[likedPostIDList.size - 1 - index]
             //게시물이 표시될 postItem 레이아웃
             val postItem = likedPostItemList[index]
 

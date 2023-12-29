@@ -26,6 +26,7 @@
     <string name="like">내가 좋아한 게시물</string>
     <string name="no_written_posts">작성한 게시물이 없습니다.</string>
     <string name="no_liked_posts">좋아한 게시물이 없습니다.</string>
+    <string name="keyword">키워드</string>
 
     <string name="plz_input_id">아이디를 입력해 주세요</string>
     <string name="plz_input_pw">비밀번호를 입력해 주세요</string>

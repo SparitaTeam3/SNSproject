@@ -93,42 +93,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_myinfo" />
 
-<!--<<<<<<< HEAD-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="35dp"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="150dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:orientation="horizontal">-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/tv_tag1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <include layout="@layout/tag_item_layout" />-->
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/tv_tag2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <include layout="@layout/tag_item_layout" />-->
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/tv_tag3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <include layout="@layout/tag_item_layout" />-->
-<!--        </LinearLayout>-->
 
 
 
 
-<!--    </LinearLayout>-->
-<!--=======-->
+
 
     <TextView
         android:id="@+id/tv_post"
@@ -302,6 +271,48 @@
         </LinearLayout>
 
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/tv_character1"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/keyword"
+        android:textSize="12sp"
+        android:textColor="#39B54A"
+        android:gravity="center"
+        android:background="@drawable/tag_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+
+    <TextView
+        android:id="@+id/tv_character2"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/keyword"
+        android:textSize="12sp"
+        android:textColor="#39B54A"
+        android:gravity="center"
+        android:background="@drawable/tag_layout"
+        app:layout_constraintStart_toEndOf="@+id/tv_character1"
+        app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+
+    <TextView
+        android:id="@+id/tv_character3"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/keyword"
+        android:textSize="12sp"
+        android:textColor="#39B54A"
+        android:gravity="center"
+        android:background="@drawable/tag_layout"
+        app:layout_constraintStart_toEndOf="@+id/tv_character2"
+        app:layout_constraintTop_toBottomOf="@+id/img_profile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
