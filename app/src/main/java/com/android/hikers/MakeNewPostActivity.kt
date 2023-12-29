@@ -11,10 +11,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.setPadding
-import com.android.hikers.data.Post
 import com.android.hikers.data.PostManager
 import com.android.hikers.data.UserManager
 import com.google.android.material.textfield.TextInputLayout

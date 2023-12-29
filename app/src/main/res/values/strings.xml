@@ -1,15 +1,13 @@
 <resources>
-    <!--  로그인 화면  -->
     <string name="app_name">Hikers</string>
+    <!--  로그인 화면  -->
     <string name="id">아이디</string>
     <string name="login">로그인</string>
     <string name="not_member">아직 회원이 아니신가요?</string>
     <string name="sign_up">가입하기</string>
-
     <string name="password">비밀번호</string>
     <string name="check_password">비밀번호 확인</string>
     <string name="name">이름</string>
-  
     <string name="next">다음</string>
 
     <string name="plz_input_id">아이디를 입력해 주세요</string>
@@ -26,7 +24,7 @@
 
     <!--  회원정보 화면  -->
     <string name="plz_type_introduce">자기소개를 입력해주세요.</string>
-
+    <string name="update_user_info">회원정보 변경</string>
     <string name="summit_sign_up">가입하기</string>
 
     <!--  메인 화면  -->
