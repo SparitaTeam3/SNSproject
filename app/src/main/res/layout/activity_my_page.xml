@@ -92,6 +92,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_myinfo" />
 
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/tv_tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/tag_item_layout" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tv_tag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/tag_item_layout" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tv_tag3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/tag_item_layout" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
     <HorizontalScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"

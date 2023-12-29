@@ -34,6 +34,7 @@ class MyPage : AppCompatActivity() {
     private val userManager = UserManager.newInstance()
     private val postManager = PostManager.newInstance()
 
+
     //현재 로그인 한 유저의 아이디
     private val userID by lazy {
         "lee_younghee"
@@ -57,6 +58,21 @@ class MyPage : AppCompatActivity() {
             R.id.mypage_post3 to -1,
             R.id.mypage_post4 to -1,
             R.id.mypage_post5 to -1
+        )
+    }
+    private val userTags by lazy {
+        listOf<TextView>(
+            findViewById(R.id.tv_tag1),
+            findViewById(R.id.tv_tag2),
+            findViewById(R.id.tv_tag3)
+        )
+    }
+
+    private val usertagsMap by lazy {
+        mutableMapOf<Int, Int>(
+            R.id.tv_tag1 to -1,
+            R.id.tv_tag2 to -1,
+            R.id.tv_tag3 to -1
         )
     }
 
@@ -106,16 +122,17 @@ class MyPage : AppCompatActivity() {
         val userId = loginUser.ID
         val userintroduction = loginUser.introduction
 
+
+
         name.text = userName
         id.text = userId
         //아직 소개가 없어서 주석 처리 함
         //introduction.text = userintroduction
         profilePhoto.run {
-//            if (userImage != null) setImageURI(userImage)
-//            else setImageResource(R.drawable.default_profile)
+            if (userImage != null) setImageURI(userImage)
+            else setImageResource(R.drawable.default_profile)
         }
     }
-
 
 
     private fun initHorizontalScrollView() {
