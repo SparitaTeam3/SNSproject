@@ -37,13 +37,11 @@ class UserInfoActivity : AppCompatActivity() {
     private var userNameInput = false
     private var userCharacterValue = MutableList(3) { "" }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
         setValue()
         setup()
-
     }
 
     private fun setup() {
@@ -90,7 +88,9 @@ class UserInfoActivity : AppCompatActivity() {
                 if (result.resultCode == RESULT_OK) {
                     profileImageUri = result.data?.data
                     grantUriPermission(
-                        "com.android.hikers", profileImageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        "com.android.hikers",
+                        profileImageUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
                     ivUserInfoProfile?.run {
                         scaleType = ImageView.ScaleType.CENTER_CROP

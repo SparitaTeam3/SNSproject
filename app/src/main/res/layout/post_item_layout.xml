@@ -5,7 +5,6 @@
         android:id="@+id/layout_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/post_item_background"
         android:orientation="vertical">
 
         <ImageView
@@ -27,6 +26,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/post_title"
+                android:ellipsize="end"
+                android:maxWidth="200dp"
+                android:maxLines="1"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +40,9 @@
                 android:layout_height="12dp"
                 android:layout_marginStart="11dp"
                 android:src="@drawable/pin_icon"
-                app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_location"
                 app:layout_constraintStart_toEndOf="@id/tv_title"
-                app:layout_constraintTop_toTopOf="@id/tv_title" />
+                app:layout_constraintTop_toTopOf="@id/tv_location" />
 
             <TextView
                 android:id="@+id/tv_location"
