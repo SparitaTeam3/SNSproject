@@ -185,6 +185,8 @@ class MyPage : AppCompatActivity() {
                 val detailIntent = Intent(this, DetailPageActivity::class.java).apply {
                     putExtra("userID", userID)
                     putExtra("postID", postID)
+                    //마이페이지에서 디테일 화면을 시작했음을 전달
+                    putExtra("activityName", "MyPage")
                 }
                 startActivity(detailIntent)
             }
