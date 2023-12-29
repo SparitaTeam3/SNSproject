@@ -10,7 +10,6 @@ fun TextView.showErrMsg(msg: String, editText: EditText) {
     setText(msg)
     visibility = View.VISIBLE
     editText.background = context.getDrawable(R.drawable.edit_text_background_error)
-
 }
 
 fun EditText.showError(msg: String, errMsg: TextView) {

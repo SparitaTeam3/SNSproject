@@ -9,6 +9,8 @@
     <string name="password">비밀번호</string>
     <string name="check_password">비밀번호 확인</string>
     <string name="name">이름</string>
+  
+    <string name="next">다음</string>
 
     <string name="plz_input_id">아이디를 입력해 주세요</string>
     <string name="plz_input_pw">비밀번호를 입력해 주세요</string>
@@ -24,11 +26,12 @@
 
     <!--  회원정보 화면  -->
     <string name="plz_type_introduce">자기소개를 입력해주세요.</string>
+
     <string name="summit_sign_up">가입하기</string>
 
     <!--  메인 화면  -->
     <string name="user_greeting">안녕하세요, %s님!</string>
-    <string name="no_post">최신 게시물이 없습니다.</string>
+    <string name="no_post">최신 게시물이 없습니다</string>
     <string name="post_title">게시물 제목</string>
     <string name="post_location">위치 정보</string>
     <string name="post_writer_name">작성자</string>
@@ -51,5 +54,6 @@
     <!--  애니메이션 공유 요소 이름  -->
     <string name="trans_post_image">post_image</string>
     <string name="trans_profile_image">profile_image</string>
+
 
 </resources>

@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.android.hikers.data.UserManager
@@ -22,6 +23,7 @@ import com.android.hikers.messages.ErrorMsg
 
 class UserInfoActivity : AppCompatActivity() {
     private val ivUserInfoProfile by lazy { findViewById<ImageView>(R.id.iv_user_info_profile) }
+    private val btnUserInfoChangeProfile by lazy { findViewById<Button>(R.id.btn_user_info_change_profile) }
     private val etUserInfoName by lazy { findViewById<EditText>(R.id.et_user_info_name) }
     private val tvUserInfoNameErrorMsg by lazy { findViewById<TextView>(R.id.tv_user_info_name_error_msg) }
     private val etUserInfoIntroduce by lazy { findViewById<EditText>(R.id.et_user_info_introduce) }
@@ -37,13 +39,11 @@ class UserInfoActivity : AppCompatActivity() {
     private var userNameInput = false
     private var userCharacterValue = MutableList(3) { "" }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
         setValue()
         setup()
-
     }
 
     private fun setup() {
@@ -85,12 +85,19 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun setProfileImage() {
+        btnUserInfoChangeProfile.setOnClickListener()
+        ivUserInfoProfile.setOnClickListener()
+    }
+
+    private fun View.setOnClickListener() {
         val pickImageLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     profileImageUri = result.data?.data
                     grantUriPermission(
-                        "com.android.hikers", profileImageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        "com.android.hikers",
+                        profileImageUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
                     ivUserInfoProfile?.run {
                         scaleType = ImageView.ScaleType.CENTER_CROP
@@ -98,7 +105,7 @@ class UserInfoActivity : AppCompatActivity() {
                     }
                 }
             }
-        ivUserInfoProfile.setOnClickListener {
+        setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
 
             intent.type = "image/*"
