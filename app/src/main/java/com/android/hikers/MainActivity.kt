@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "profile image clicked")
             //로그인한 회원 ID 전달하며, 마이페이지 화면으로 이동
             val profileIntent = Intent(this, MyPage::class.java).apply {
-                putExtra("userID", userID)
+                putExtra(EXTRA_ID, userID)
             }
 
             //공유 요소가 있는 화면 애니메이션 만들기

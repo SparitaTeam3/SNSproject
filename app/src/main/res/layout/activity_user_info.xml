@@ -28,9 +28,8 @@
             android:layout_height="24dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/frame_circle"
-            android:backgroundTint="#00E664"
-            android:elevation="10dp"
+            android:background="@drawable/button_add"
+            android:elevation="15dp"
             android:shadowColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/iv_user_info_profile"
             app:layout_constraintEnd_toEndOf="@id/iv_user_info_profile" />

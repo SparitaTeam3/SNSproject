@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/post_title"
                 android:ellipsize="end"
-                android:maxWidth="200dp"
+                android:maxWidth="180dp"
                 android:maxLines="1"
                 android:textSize="15sp"
                 android:textStyle="bold"

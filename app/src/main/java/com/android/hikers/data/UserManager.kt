@@ -25,7 +25,7 @@ class UserManager private constructor() {
 
     fun addNewUser(
         ID: String, password: String, name: String,
-        image: Uri = Uri.parse("drawable://" + R.drawable.default_profile),
+        image: Uri? = null,
         introduction: String = "",
         personality: MutableList<String> = mutableListOf<String>()
     ) {
