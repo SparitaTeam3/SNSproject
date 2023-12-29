@@ -52,6 +52,7 @@ class PostManager private constructor(){
 
     fun addNewPost(title:String, body:String, writerId:String, image:Uri? = null, location:String = "위치 정보 없음"){
 
+
         //게시물 ID 붙이기
         val postID = nextPostID++
         //게시물 게시된 시간 구하기
