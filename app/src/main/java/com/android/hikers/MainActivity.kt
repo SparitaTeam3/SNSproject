@@ -86,8 +86,20 @@ class MainActivity : AppCompatActivity() {
 
         userGreetingTextView.text = getString(R.string.user_greeting, userName)
         userProfileImageView.run {
-            if (userImage != null) setImageURI(userImage)
-            else setImageResource(R.drawable.default_profile)
+            if (userImage != null){
+                try{
+                    Log.d(TAG, "user profile image uri is not null")
+                    setImageURI(userImage)
+                }
+                catch(e:Exception){
+                    Log.d(TAG, "프로필 이미지 uri 접근 문제 발생!")
+                    setImageResource(R.drawable.default_profile)
+                }
+            }
+            else {
+                Log.d(TAG, "user profile image uri is null")
+                setImageResource(R.drawable.default_profile)
+            }
         }
     }
 
@@ -132,6 +144,7 @@ class MainActivity : AppCompatActivity() {
             imageImageView.run {
                 if (post.image != null) {
                     try {
+                        Log.d(TAG, "postID: ${post.postID}, image uri is not null")
                         setImageURI(post.image)
                         scaleType = ImageView.ScaleType.CENTER_CROP
                     }
@@ -141,6 +154,7 @@ class MainActivity : AppCompatActivity() {
                         scaleType = ImageView.ScaleType.CENTER
                     }
                 } else {
+                    Log.d(TAG, "postID: ${post.postID}, image uri is null")
                     setImageResource(R.drawable.hikers_icon_small_grey)
                     scaleType = ImageView.ScaleType.CENTER
                 }
