@@ -104,6 +104,14 @@ class MyPage : AppCompatActivity() {
         goToUserInfo()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        //디테일 페이지에서 좋아요를 누르거나 취소한 뒤, 마이 페이지로 돌아왔을 때,
+        //좋아요 여부를 반영하여 다시 UI 표시하기
+        initLikedPostScrollView()
+    }
+
     private fun setViewMore(contentTextView: TextView, viewMoreTextView: TextView) {
         contentTextView.post {
             val lineCount = contentTextView.layout.lineCount
@@ -163,10 +171,11 @@ class MyPage : AppCompatActivity() {
         //내가 작성한 게시물 중 최근에 작성한 5개의 게시물만 표시하기
         for (index in 0 until min(5, myPostIDList.size)) {
             //표시할 게시물 ID
-            val postID = myPostIDList[index]
+            val postID = myPostIDList[myPostIDList.size -1 -index]
             //게시물이 표시될 postItem 레이아웃
             val postItem = myPostItemList[index]
 
+            myPostItemIDMap[postItem.id] = postID
             setPostItemUI(postItem, postID)
         }
     }
@@ -174,6 +183,11 @@ class MyPage : AppCompatActivity() {
     private fun initLikedPostScrollView() {
         val loginUser = userManager.findUserByID(userID)!!
         val likedPostIDList = loginUser.likedPostIDList
+
+        Log.d(TAG, "userID: ${userID}, likedPostList: ")
+        for(postID in likedPostIDList){
+            Log.d(TAG, "$postID")
+        }
 
         if (likedPostIDList.isEmpty()) {
             noLikedPostTextView.isVisible = true
@@ -188,16 +202,16 @@ class MyPage : AppCompatActivity() {
         //내가 좋아한 게시물 중 최근에 작성한 5개의 게시물만 표시하기
         for (index in 0 until min(5, likedPostIDList.size)) {
             //표시할 게시물 ID
-            val postID = likedPostIDList[index]
+            val postID = likedPostIDList[likedPostIDList.size - 1 -index]
             //게시물이 표시될 postItem 레이아웃
             val postItem = likedPostItemList[index]
 
+            likedPostItemIDMap[postItem.id] = postID
             setPostItemUI(postItem, postID)
         }
     }
 
     private fun setPostItemUI(postItem: ViewGroup, postID: Int) {
-        myPostItemIDMap[postItem.id] = postID
         postItem.isVisible = true
 
         val imageView = postItem.findViewById<ImageView>(R.id.pt_image)
@@ -214,12 +228,12 @@ class MyPage : AppCompatActivity() {
                 } catch (e: Exception) {
                     Log.d(TAG, "게시물 이미지 접근 오류 발생!")
                     setImageResource(R.drawable.hikers_icon_small_grey)
-                    scaleType = ImageView.ScaleType.CENTER
+                    scaleType = ImageView.ScaleType.CENTER_INSIDE
                 }
             } else {
                 Log.d(TAG, "postID: ${post.postID}, post image is null")
                 setImageResource(R.drawable.hikers_icon_small_grey)
-                scaleType = ImageView.ScaleType.CENTER
+                scaleType = ImageView.ScaleType.CENTER_INSIDE
             }
         }
         titleText.text = post.title
