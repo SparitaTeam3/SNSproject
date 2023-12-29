@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.android.hikers.data.PostManager
 import com.android.hikers.data.UserManager
 
@@ -28,8 +29,9 @@ class DetailPageActivity : AppCompatActivity() {
     private val heartNumTextView: TextView by lazy { findViewById(R.id.detail_heartNum) }
 
     private val preButton: ImageButton by lazy { findViewById(R.id.detail_btn_pre) }
+    private val preTextView:TextView by lazy{findViewById(R.id.detail_txt_pre)}
     private val nextButton: ImageButton by lazy { findViewById(R.id.detail_btn_next) }
-
+    private val nextTextView:TextView by lazy{findViewById(R.id.detail_txt_next)}
 
     private val userID by lazy {
         intent.getStringExtra("userID") ?: ""
@@ -45,6 +47,15 @@ class DetailPageActivity : AppCompatActivity() {
 
         //현재 화면에 표시할 게시물ID 
         postID = intent?.getIntExtra("postID", 0) ?: 0
+
+        //디테일 화면을 시작시킨 액티비티 이름
+        val activityName = intent?.getStringExtra("activityName") ?: ""
+        if(activityName == "MyPage"){
+            preButton.isVisible = false
+            preTextView.isVisible = false
+            nextButton.isVisible = false
+            nextTextView.isVisible = false
+        }
 
         //뒤로가기 버튼 클릭 이벤트 처리
         initBackButton()
