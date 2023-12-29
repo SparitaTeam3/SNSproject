@@ -75,6 +75,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        Log.d(TAG, postManager.getRecentPostList(1).toString())
+          
         //최신 게시글 다시 보이기
         initScrollView()
     }
@@ -233,8 +235,13 @@ class MainActivity : AppCompatActivity() {
     private fun initWriteFloatingButton() {
         writeFloatingButton.setOnClickListener {
             Log.d(TAG, "write button clicked")
+            Log.d(TAG, userID)
 
-            //TODO 로그인한 회원 ID 전달하며, 글쓰기 화면으로 이동
+            //로그인한 회원 ID 전달하며, 글쓰기 화면으로 이동
+            val makeNewPostIntent = Intent(this, MakeNewPostActivity::class.java).apply {
+                putExtra("userID", userID)
+            }
+            startActivity(makeNewPostIntent)
         }
     }
 }
