@@ -37,6 +37,12 @@ class MakeNewPostActivity : AppCompatActivity() {
     private val getImage=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK) {
             imgUri = it.data?.data
+            grantUriPermission(
+                "com.android.hikers",
+                imgUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
             post_img.setPadding(0)
             post_img.setImageURI(imgUri)
         }
@@ -79,7 +85,7 @@ class MakeNewPostActivity : AppCompatActivity() {
         img_add_btn.setOnClickListener {
             Log.d(TAG, "image add button clicked")
 
-            val imgIntent=Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            val imgIntent=Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             getImage.launch(imgIntent)
         }
     }
