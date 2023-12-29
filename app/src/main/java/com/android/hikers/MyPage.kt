@@ -145,7 +145,7 @@ class MyPage : AppCompatActivity() {
         val userName = loginUser.name
         val userImage = loginUser.profileImage
         val userId = "@ " + loginUser.ID
-        val userintroduction = loginUser.introduction
+        val userIntroduction = loginUser.introduction
 
         character1.isVisible = false
         character2.isVisible = false
@@ -154,28 +154,28 @@ class MyPage : AppCompatActivity() {
         if (loginUser.character.size != 0) {
             if (loginUser.character.size == 1) {
                 character1.isVisible = true
-                val usercharacter1 = loginUser.character[0]
+                val userCharacter1 = loginUser.character[0]
 
-                character1.text = usercharacter1
+                character1.text = userCharacter1
             } else if (loginUser.character.size == 2) {
                 character1.isVisible = true
                 character2.isVisible = true
-                val usercharacter1 = loginUser.character[0]
-                val usercharacter2 = loginUser.character[1]
+                val userCharacter1 = loginUser.character[0]
+                val userCharacter2 = loginUser.character[1]
 
-                character1.text = usercharacter1
-                character2.text = usercharacter2
+                character1.text = userCharacter1
+                character2.text = userCharacter2
             } else if (loginUser.character.size == 3) {
                 character1.isVisible = true
                 character2.isVisible = true
                 character3.isVisible = true
-                val usercharacter1 = loginUser.character[0]
-                val usercharacter2 = loginUser.character[1]
-                val usercharacter3 = loginUser.character[2]
+                val userCharacter1 = loginUser.character[0]
+                val userCharacter2 = loginUser.character[1]
+                val userCharacter3 = loginUser.character[2]
 
-                character1.text = usercharacter1
-                character2.text = usercharacter2
-                character3.text = usercharacter3
+                character1.text = userCharacter1
+                character2.text = userCharacter2
+                character3.text = userCharacter3
             }
 
 
@@ -185,7 +185,7 @@ class MyPage : AppCompatActivity() {
         name.text = userName
         id.text = userId
         //아직 소개가 없어서 주석 처리 함
-        info.text = userintroduction
+        info.text = userIntroduction
         profilePhoto.run {
             if (userImage != null) setImageURI(userImage)
             else setImageResource(R.drawable.default_profile)
