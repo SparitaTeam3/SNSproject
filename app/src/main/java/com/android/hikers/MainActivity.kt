@@ -242,7 +242,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun initWriteFloatingButton() {
         writeFloatingButton.setOnClickListener {
             Log.d(TAG, "write button clicked")

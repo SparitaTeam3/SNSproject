@@ -33,13 +33,13 @@ class PostManager private constructor(){
             "kim_chulsoo",
             location = "히말라야",
             image = Uri.parse("android.resource://com.android.hikers/"+R.drawable.post_img_example1))
-            //image = Uri.parse("drawable://" + R.drawable.post_img_example1))
+        //image = Uri.parse("drawable://" + R.drawable.post_img_example1))
 
         addNewPost("여기가 어느 산인지 아시는 분 계신가요?",
             "인터넷에서 본 사진인데요 여기가 어느 산인지 모르겠어요.ㅜㅜ\n여기가 어딘지 아시는 분 있다면 꼭 댓글 달아주세요!\n",
             "lee_younghee",
             image = Uri.parse("android.resource://com.android.hikers/"+R.drawable.post_img_example2))
-            //image = Uri.parse("drawable://" + R.drawable.post_img_example2))
+        //image = Uri.parse("drawable://" + R.drawable.post_img_example2))
     }
 
     private fun getCurrentDateTime():String{
@@ -50,7 +50,6 @@ class PostManager private constructor(){
         return ""
     }
 
-    //새 게시물 생성 후, 생성된 게시물 ID 반환
     fun addNewPost(title:String, body:String, writerId:String, image:Uri? = null, location:String = "위치 정보 없음"):Int{
         //게시물 ID 붙이기
         val postID = nextPostID++
