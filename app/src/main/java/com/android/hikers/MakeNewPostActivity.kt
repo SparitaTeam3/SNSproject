@@ -14,6 +14,7 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.setPadding
 import com.android.hikers.data.PostManager
+import com.android.hikers.data.UserManager
 import com.google.android.material.textfield.TextInputLayout
 
 class MakeNewPostActivity : AppCompatActivity() {
@@ -26,13 +27,20 @@ class MakeNewPostActivity : AppCompatActivity() {
     private val img_add_btn: ImageButton by lazy { findViewById(R.id.btn_imgAdd) }
     private val post_img: ImageView by lazy { findViewById(R.id.img_post) }
 
-    private val postManager=PostManager.newInstance()
+    private val postManager = PostManager.newInstance()
+    private val userManager= UserManager.newInstance()
 
     private var imgUri: Uri? = null
 
     private val getImage=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK) {
             imgUri = it.data?.data
+            grantUriPermission(
+                "com.android.hikers",
+                imgUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
             post_img.setPadding(0)
             post_img.setImageURI(imgUri)
         }
@@ -64,7 +72,9 @@ class MakeNewPostActivity : AppCompatActivity() {
             val bodyStr=post_body.text.toString()
 
             Log.d(TAG, "img uri: ${imgUri.toString()}")
-            postManager.addNewPost(titleStr, bodyStr, userId, imgUri, locStr)
+            val newPostID = postManager.addNewPost(titleStr, bodyStr, userId, imgUri, locStr)
+            userManager.findUserByID(userId)!!.addWrittenPostID(newPostID)
+
             finish()
         }
     }
@@ -73,7 +83,7 @@ class MakeNewPostActivity : AppCompatActivity() {
         img_add_btn.setOnClickListener {
             Log.d(TAG, "image add button clicked")
 
-            val imgIntent=Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            val imgIntent=Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             getImage.launch(imgIntent)
         }
     }
