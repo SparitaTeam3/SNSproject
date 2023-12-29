@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 import com.android.hikers.data.PostManager
 import com.android.hikers.data.UserManager
 import com.google.android.material.chip.ChipGroup
@@ -225,15 +226,18 @@ class MyPage : AppCompatActivity() {
                     Log.d(TAG, "postID: ${post.postID}, post image is not null")
                     setImageURI(post.image)
                     scaleType = ImageView.ScaleType.CENTER_CROP
+                    setPadding(0)
                 } catch (e: Exception) {
                     Log.d(TAG, "게시물 이미지 접근 오류 발생!")
                     setImageResource(R.drawable.hikers_icon_small_grey)
                     scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    setPadding(20)
                 }
             } else {
                 Log.d(TAG, "postID: ${post.postID}, post image is null")
                 setImageResource(R.drawable.hikers_icon_small_grey)
                 scaleType = ImageView.ScaleType.CENTER_INSIDE
+                setPadding(20)
             }
         }
         titleText.text = post.title
