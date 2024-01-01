@@ -35,6 +35,11 @@
     <string name="post_writer_name">작성자</string>
     <string name="post_time">작성 시간</string>
 
+    <!--  디테일 화면  -->
+    <string name="sample_text_body">Lorem ipsum dolor sit amet consectetur. Mi ut cum faucibus venenatis consectetur bibendum. Vitae facilisis lacus pharetra egestas enim quis hendrerit. Molestie ultrices tristique faucibus placerat. Eu eu cras at ornare tortor sapien purus sagittis commodo.</string>
+    <string name="sample_text_body_long">Lorem ipsum dolor sit amet consectetur. Mi ut cum faucibus venenatis consectetur bibendum. Vitae facilisis lacus pharetra egestas enim quis hendrerit. Molestie ultrices tristique faucibus placerat. Eu eu cras at ornare tortor sapien purus sagittis commodo.Lorem ipsum dolor sit amet consectetur. Mi ut cum faucibus venenatis consectetur bibendum. Vitae facilisis lacus pharetra egestas enim quis hendrerit. Molestie ultrices tristique faucibus placerat. Eu eu cras at ornare tortor sapien purus sagittis commodo.Lorem ipsum dolor sit amet consectetur. Mi ut cum faucibus venenatis consectetur bibendum. Vitae facilisis lacus pharetra egestas enim quis hendrerit. Molestie ultrices tristique faucibus placerat. Eu eu cras at ornare tortor sapien purus sagittis commodo.Lorem ipsum dolor sit amet consectetur. Mi ut cum faucibus venenatis consectetur bibendum. Vitae facilisis lacus pharetra egestas enim quis hendrerit. Molestie ultrices tristique faucibus placerat. Eu eu cras at ornare tortor sapien purus sagittis commodo.Lorem ipsum dolor sit amet consectetur. Mi ut cum faucibus venenatis consectetur bibendum. Vitae facilisis lacus pharetra egestas enim quis hendrerit. Molestie ultrices tristique faucibus placerat. Eu eu cras at ornare tortor sapien purus sagittis commodo.</string>
+
+
     <!-- 마이페이지 화면 -->
     <string name="edit_myinfo">회원정보 수정</string>
     <string name="introduction">자기소개</string>
@@ -49,11 +54,12 @@
     <string name="enter_title">게시글 제목을 입력해주세요.</string>
     <string name="enter_body">게시글 내용을 입력해주세요.</string>
     <string name="upload_post">올리기</string>
-    <string name="title_error">제목이 비여있으면 안됩니다.</string>
+    <string name="title_error">제목이 비어있으면 안됩니다.</string>
 
     <!--  애니메이션 공유 요소 이름  -->
     <string name="trans_post_image">post_image</string>
     <string name="trans_profile_image">profile_image</string>
+
 
 
 </resources>
