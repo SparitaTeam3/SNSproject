@@ -1,7 +1,7 @@
 # ⛰️HIKERS⛰️
 등산하는 사람들을 위한 SNS
 
-### 🎯Developers
+## 🎯Developers
 
 |이름|github link|
 |:---|:---|
@@ -10,7 +10,7 @@
 배영수|🔗[Bongpal-dev](https://github.com/Bongpal-dev)
 박재원|🔗[parkjaewons](https://github.com/parkjaewons) 
 
-### 🎯Data Management
+## 🎯Data Management
 
 - 회원 데이터 관리
   - User 데이터 클래스
@@ -19,7 +19,7 @@
   - Post 데이터 클래스
   - PostManager 싱글톤 클래스
 
-### 🎯Screen Implementation
+## 🎯Screen Implementations
   
 #### 로그인 화면
 - **앱 실행 시 첫 화면, 로그인을 위한 화면**
@@ -67,7 +67,7 @@
 - 회원이 최근에 좋아요한 게시글 5개 목록 표시
 - 게시글 클릭 시, 해당 게시글의 디테일 화면으로 이동
 
-### 🎯Other Implementations
+## 🎯Other Implementations
 - Dark Theme 지원
 - 다국어(English) 지원
 - 폰트 크기 변경 지원
