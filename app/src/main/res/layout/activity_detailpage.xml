@@ -94,11 +94,11 @@
             android:layout_marginStart="8dp"
             android:text="1일전"
             android:textSize="12sp"
-            android:textColor="#61000000"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@id/detail_name"
             app:layout_constraintStart_toEndOf="@id/detail_name"
             app:layout_constraintTop_toTopOf="@id/detail_name"
-            app:layout_constraintBottom_toBottomOf="@id/detail_name"
-            />
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,8 +174,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        android:inputType="number|numberDecimal|numberSigned"
         android:text="187"
+        android:textColor="@color/dark_gray"
         app:layout_constraintBottom_toTopOf="@+id/detail_btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_postTxt"
