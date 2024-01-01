@@ -54,7 +54,7 @@
     <string name="enter_title">Please enter the title of the post.</string>
     <string name="enter_body">Please enter the content of the post.</string>
     <string name="upload_post">Upload</string>
-    <string name="title_error">Please enter the title of the post.</string>
+    <string name="title_error">The title should not be empty.</string>
 
     <!--  애니메이션 공유 요소 이름  -->
     <string name="trans_post_image">post_image</string>
