@@ -2,6 +2,7 @@ package com.android.hikers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -43,6 +44,8 @@ class DetailPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailpage)
+        //본문 TextView 스크롤 추가
+        bodyTextView.movementMethod = ScrollingMovementMethod()
 
         //현재 화면에 표시할 게시물ID 
         postID = intent?.getIntExtra("postID", 0) ?: 0
