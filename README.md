@@ -5,7 +5,7 @@
 
 |이름|github link|
 |:---|:---|
-이성재|🔗[sungj5lee](https://github.com/sunjgj5lee)
+이성재|🔗[sungj5lee](https://github.com/sungj5lee)
 이선주|🔗[sunjoolee](https://github.com/sunjoolee)
 배영수|🔗[Bongpal-dev](https://github.com/Bongpal-dev)
 박재원|🔗[parkjaewons](https://github.com/parkjaewons) 
