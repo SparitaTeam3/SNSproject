@@ -10,6 +10,11 @@
 배영수|🔗[Bongpal-dev](https://github.com/Bongpal-dev)
 박재원|🔗[parkjaewons](https://github.com/parkjaewons) 
 
+## 🎯Wire Frame
+- 🔗[Hikers-Figma](https://www.figma.com/file/N8YlXTv44BPbGvo7uPCfz2/Hikers?type=design&node-id=2%3A5&mode=design&t=iXu5qB0D3kQYvtZe-1)
+
+<img src = "https://github.com/SparitaTeam3/SNSproject/assets/86330886/cdf2bb26-f711-461d-ba5a-d912b1f35427" width="70%" height="70%">
+
 ## 🎯Data Management
 
 - 회원 데이터 관리
