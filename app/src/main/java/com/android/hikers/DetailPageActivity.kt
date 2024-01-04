@@ -28,9 +28,9 @@ class DetailPageActivity : AppCompatActivity() {
     private val heartNumTextView: TextView by lazy { findViewById(R.id.detail_heartNum) }
 
     private val preButton: ImageButton by lazy { findViewById(R.id.detail_btn_pre) }
-    private val preTextView:TextView by lazy{findViewById(R.id.detail_txt_pre)}
+    private val preTextView: TextView by lazy { findViewById(R.id.detail_txt_pre) }
     private val nextButton: ImageButton by lazy { findViewById(R.id.detail_btn_next) }
-    private val nextTextView:TextView by lazy{findViewById(R.id.detail_txt_next)}
+    private val nextTextView: TextView by lazy { findViewById(R.id.detail_txt_next) }
 
     private val userID by lazy {
         intent.getStringExtra("userID") ?: ""
@@ -49,7 +49,7 @@ class DetailPageActivity : AppCompatActivity() {
 
         //디테일 화면을 시작시킨 액티비티 이름
         val activityName = intent?.getStringExtra("activityName") ?: ""
-        if(activityName == "MyPage"){
+        if (activityName == "MyPage") {
             preButton.isVisible = false
             preTextView.isVisible = false
             nextButton.isVisible = false
@@ -71,7 +71,7 @@ class DetailPageActivity : AppCompatActivity() {
         initNextButton()
     }
 
-    private fun initBackButton(){
+    private fun initBackButton() {
         backButton.setOnClickListener {
             //디테일 화면 종료 -> 메인 화면으로 돌아가기
             finish()
@@ -87,8 +87,7 @@ class DetailPageActivity : AppCompatActivity() {
                 try {
                     imageImageView.setImageURI(image)
                     imageImageView.scaleType = ImageView.ScaleType.CENTER_CROP
-                }
-                catch (e:Exception){
+                } catch (e: Exception) {
                     Log.d(TAG, "게시물 이미지 uri 접근 문제 발생!")
                     imageImageView.setImageResource(R.drawable.hikers_icon_small_grey)
                     imageImageView.scaleType = ImageView.ScaleType.CENTER
@@ -142,16 +141,15 @@ class DetailPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPreNextButtonUI(){
+    private fun setPreNextButtonUI() {
         //이전 게시물이 없는 경우, 이전 버튼 disable
         val mostRecentPostID = postManager.getMostRecentPostID()
-        Log.d(TAG, "set pre button, mostRecentPostID: ${mostRecentPostID?: "null"}")
-        preButton.run{
-            if((mostRecentPostID == null)||(postID == mostRecentPostID)){
+        Log.d(TAG, "set pre button, mostRecentPostID: ${mostRecentPostID ?: "null"}")
+        preButton.run {
+            if ((mostRecentPostID == null) || (postID == mostRecentPostID)) {
                 isEnabled = false
                 setImageResource(R.drawable.btn_nextpage_disabled)
-            }
-            else{
+            } else {
                 isEnabled = true
                 setImageResource(R.drawable.btn_nextpage)
             }
@@ -159,20 +157,19 @@ class DetailPageActivity : AppCompatActivity() {
 
         //다음 게시물이 없는 경우, 다음 버튼 disable
         val leastRecentPostID = postManager.getLeastRecentPostID(10)
-        Log.d(TAG, "set next button, leastRecentPostID: ${leastRecentPostID?: "null"}")
-        nextButton.run{
-            if((leastRecentPostID == null)||(postID == leastRecentPostID)){
+        Log.d(TAG, "set next button, leastRecentPostID: ${leastRecentPostID ?: "null"}")
+        nextButton.run {
+            if ((leastRecentPostID == null) || (postID == leastRecentPostID)) {
                 isEnabled = false
                 setImageResource(R.drawable.btn_nextpage_disabled)
-            }
-            else{
+            } else {
                 isEnabled = true
                 setImageResource(R.drawable.btn_nextpage)
             }
         }
     }
-    
-    private fun initHeartButton(){
+
+    private fun initHeartButton() {
         heartButton.setOnClickListener {
             //로그인한 User 정보 가져오기
             userManager.findUserByID(userID)!!.run {
@@ -192,17 +189,18 @@ class DetailPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun initPreButton(){
+    private fun initPreButton() {
         preButton.setOnClickListener {
-            if(!it.isEnabled) return@setOnClickListener
+            if (!it.isEnabled) return@setOnClickListener
             postID++
             Log.d(TAG, "pre button clicked, postID: ${postID}")
             initDetailPage()
         }
     }
-    private fun initNextButton(){
+
+    private fun initNextButton() {
         nextButton.setOnClickListener {
-            if(!it.isEnabled) return@setOnClickListener
+            if (!it.isEnabled) return@setOnClickListener
             postID--
             Log.d(TAG, "next button clicked, postID: ${postID}")
             initDetailPage()

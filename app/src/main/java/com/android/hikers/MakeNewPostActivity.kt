@@ -31,30 +31,32 @@ class MakeNewPostActivity : AppCompatActivity() {
     private val post_img: ImageView by lazy { findViewById(R.id.img_post) }
 
     private val postManager = PostManager.newInstance()
-    private val userManager= UserManager.newInstance()
+    private val userManager = UserManager.newInstance()
 
     private var imgUri: Uri? = null
 
-    private val getImage=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        if (it.resultCode == Activity.RESULT_OK) {
-            imgUri = it.data?.data
-            grantUriPermission(
-                "com.android.hikers",
-                imgUri,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
+    private val getImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                imgUri = it.data?.data
+                grantUriPermission(
+                    "com.android.hikers",
+                    imgUri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
 
-            post_img.setPadding(0)
-            post_img.setImageURI(imgUri)
+                post_img.setPadding(0)
+                post_img.setImageURI(imgUri)
+            }
         }
-    }
-    override fun onCreate(savedInstanceState:Bundle?) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_makenewpost)
 
-        val userId=intent.getStringExtra("userID") ?: ""
-        upload_btn.isEnabled=false
-        upload_btn.alpha= 0.5F
+        val userId = intent.getStringExtra("userID") ?: ""
+        upload_btn.isEnabled = false
+        upload_btn.alpha = 0.5F
 
         closeBtnCheck()
         textFocusCheck()
@@ -64,61 +66,61 @@ class MakeNewPostActivity : AppCompatActivity() {
 
     }
 
-    private fun closeBtnCheck(){
+    private fun closeBtnCheck() {
         close_btn.setOnClickListener {
             Log.d(TAG, "close button clicked")
             finish()
         }
     }
 
-    private fun textFocusCheck(){
-        post_title.editText?.setOnFocusChangeListener{v, hasFocus ->
-            if(post_title.editText!!.text.toString().isEmpty()){
-                when(hasFocus){
-                    true -> post_title.hint=""
-                    false -> post_title.hint=getString(R.string.enter_title)
+    private fun textFocusCheck() {
+        post_title.editText?.setOnFocusChangeListener { v, hasFocus ->
+            if (post_title.editText!!.text.toString().isEmpty()) {
+                when (hasFocus) {
+                    true -> post_title.hint = ""
+                    false -> post_title.hint = getString(R.string.enter_title)
                 }
             }
         }
-        post_body.setOnFocusChangeListener{v, hasFocus ->
-            if(post_body.text.toString().isEmpty()){
-                when(hasFocus){
-                    true -> post_body.hint=""
-                    false -> post_body.hint=getString(R.string.enter_body)
+        post_body.setOnFocusChangeListener { v, hasFocus ->
+            if (post_body.text.toString().isEmpty()) {
+                when (hasFocus) {
+                    true -> post_body.hint = ""
+                    false -> post_body.hint = getString(R.string.enter_body)
                 }
             }
         }
-        post_loc.editText?.setOnFocusChangeListener{v, hasFocus ->
-            if(post_loc.editText!!.text.toString().isEmpty()){
-                when(hasFocus){
-                    true -> post_loc.hint=""
-                    false -> post_loc.hint=getString(R.string.post_location)
+        post_loc.editText?.setOnFocusChangeListener { v, hasFocus ->
+            if (post_loc.editText!!.text.toString().isEmpty()) {
+                when (hasFocus) {
+                    true -> post_loc.hint = ""
+                    false -> post_loc.hint = getString(R.string.post_location)
                 }
             }
         }
     }
 
-    private fun textErrorCheck(){
+    private fun textErrorCheck() {
         post_title.editText?.setOnFocusChangeListener { v, hasFocus ->
-            if(!hasFocus && post_title.editText!!.text.toString().isEmpty()){
-                post_title.error=getString(R.string.title_error)
+            if (!hasFocus && post_title.editText!!.text.toString().isEmpty()) {
+                post_title.error = getString(R.string.title_error)
             }
         }
         post_title.editText?.addTextChangedListener { text ->
-            if(text.toString().isNotEmpty()){
-                upload_btn.isEnabled=true
-                upload_btn.alpha=1f
-                post_title.error=null
+            if (text.toString().isNotEmpty()) {
+                upload_btn.isEnabled = true
+                upload_btn.alpha = 1f
+                post_title.error = null
             }
         }
     }
 
-    private fun uploadBtnCheck(userId: String){
-        upload_btn.setOnClickListener{
+    private fun uploadBtnCheck(userId: String) {
+        upload_btn.setOnClickListener {
             Log.d(TAG, "upload button clicked")
-            val titleStr=post_title.editText?.text.toString()
-            val locStr=post_loc.editText?.text.toString()
-            val bodyStr=post_body.text.toString()
+            val titleStr = post_title.editText?.text.toString()
+            val locStr = post_loc.editText?.text.toString()
+            val bodyStr = post_body.text.toString()
 
             Log.d(TAG, "img uri: ${imgUri.toString()}")
             val newPostID = postManager.addNewPost(titleStr, bodyStr, userId, imgUri, locStr)
@@ -128,11 +130,12 @@ class MakeNewPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun imgAddBtnCheck(){
+    private fun imgAddBtnCheck() {
         img_add_btn.setOnClickListener {
             Log.d(TAG, "image add button clicked")
 
-            val imgIntent=Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            val imgIntent =
+                Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             getImage.launch(imgIntent)
         }
     }

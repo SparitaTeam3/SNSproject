@@ -45,6 +45,7 @@
     <string name="no_written_posts">There are no posts that I have written</string>
     <string name="no_liked_posts">There are no posts that I have liked</string>
 
+
     <!--  글쓰기 화면  -->
     <string name="enter_title">Please enter the title of the post.</string>
     <string name="enter_body">Please enter the content of the post.</string>

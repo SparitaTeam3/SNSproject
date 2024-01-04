@@ -49,7 +49,7 @@
     <string name="enter_title">게시글 제목을 입력해주세요.</string>
     <string name="enter_body">게시글 내용을 입력해주세요.</string>
     <string name="upload_post">올리기</string>
-    <string name="title_error">제목이 비여있으면 안됩니다.</string>
+    <string name="title_error">제목이 비어있으면 안됩니다.</string>
 
     <!--  애니메이션 공유 요소 이름  -->
     <string name="trans_post_image">post_image</string>

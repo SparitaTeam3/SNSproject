@@ -98,17 +98,15 @@ class MainActivity : AppCompatActivity() {
 
         userGreetingTextView.text = getString(R.string.user_greeting, userName)
         userProfileImageView.run {
-            if (userImage != null){
-                try{
+            if (userImage != null) {
+                try {
                     Log.d(TAG, "user profile image uri is not null")
                     setImageURI(userImage)
-                }
-                catch(e:Exception){
+                } catch (e: Exception) {
                     Log.d(TAG, "프로필 이미지 uri 접근 문제 발생!")
                     setImageResource(R.drawable.default_profile)
                 }
-            }
-            else {
+            } else {
                 Log.d(TAG, "user profile image uri is null")
                 setImageResource(R.drawable.default_profile)
             }
@@ -126,7 +124,11 @@ class MainActivity : AppCompatActivity() {
 
             //공유 요소가 있는 화면 애니메이션 만들기
             val options = ActivityOptions
-                .makeSceneTransitionAnimation(this, userProfileImageView, resources.getString(R.string.trans_profile_image))
+                .makeSceneTransitionAnimation(
+                    this,
+                    userProfileImageView,
+                    resources.getString(R.string.trans_profile_image)
+                )
 
             startActivity(profileIntent, options.toBundle())
         }
@@ -164,8 +166,7 @@ class MainActivity : AppCompatActivity() {
                         Log.d(TAG, "postID: ${post.postID}, image uri is not null")
                         setImageURI(post.image)
                         scaleType = ImageView.ScaleType.CENTER_CROP
-                    }
-                    catch (e:Exception){
+                    } catch (e: Exception) {
                         Log.d(TAG, "게시물 이미지 uri 접근 문제 발생!")
                         setImageResource(R.drawable.hikers_icon_small_grey)
                         scaleType = ImageView.ScaleType.CENTER
@@ -224,10 +225,10 @@ class MainActivity : AppCompatActivity() {
                 val postID = postItemIDMap[postItem.id]
                 Log.d(TAG, "post item clicked) post id: ${postID}")
 
-                if(postID == -1) return@setOnClickListener
+                if (postID == -1) return@setOnClickListener
 
                 //로그인한 회원 ID와 게시물 ID 전달하며, 디테일 화면으로 이동
-                val detailIntent = Intent(this, DetailPageActivity::class.java).apply{
+                val detailIntent = Intent(this, DetailPageActivity::class.java).apply {
                     putExtra("userID", userID)
                     putExtra("postID", postID)
                 }
@@ -236,12 +237,17 @@ class MainActivity : AppCompatActivity() {
                 val postImageView = postItem.findViewById<ImageView>(R.id.iv_img)
                 //공유 요소가 있는 화면 애니메이션 만들기
                 val options = ActivityOptions
-                    .makeSceneTransitionAnimation(this, postImageView,getString(R.string.trans_post_image))
+                    .makeSceneTransitionAnimation(
+                        this,
+                        postImageView,
+                        getString(R.string.trans_post_image)
+                    )
 
                 startActivity(detailIntent, options.toBundle())
             }
         }
     }
+
     private fun initWriteFloatingButton() {
         writeFloatingButton.setOnClickListener {
             Log.d(TAG, "write button clicked")
